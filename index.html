@@ -1,92 +1,1187 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swap Monero to BTC, USDT &amp; ETH | Rates, Fees &amp; How to Swap</title>
-<meta name="description" content="Swap Monero to BTC, USDT or ETH. Open your swap, review the rate and fees, and follow practical steps to send XMR and receive your chosen cryptocurrency.">
-<link rel="canonical" href="https://insert_url/">
-<meta property="og:title" content="Swap Monero to BTC, USDT &amp; ETH">
-<meta property="og:description" content="Swap Monero with a clear view of the rate, fee layers and receiving network. Explore XMR to BTC, USDT and ETH.">
-<meta property="og:url" content="https://insert_url/">
+<title>Monero Swap — Private, Non-Custodial XMR to BTC Exchange</title>
+<meta name="description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+<link rel="canonical" href="https://swap-monero.github.io/">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swap Monero to BTC, USDT &amp; ETH">
-<meta name="twitter:description" content="Choose your Monero swap. Review rates, understand fees and follow the steps from XMR to your receiving wallet.">
-<meta name="theme-color" content="#f5f0e7">
+<meta property="og:title" content="Monero Swap">
+<meta property="og:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+<meta property="og:url" content="https://swap-monero.github.io/">
+<meta property="og:image" content="https://swap-monero.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monero Swap">
+<meta name="twitter:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+<meta name="twitter:image" content="https://swap-monero.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-monero.github.io/#website", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange"}, {"@type": "WebPage", "@id": "https://swap-monero.github.io/#webpage", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange", "isPartOf": {"@id": "https://swap-monero.github.io/#website"}, "description": "Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.", "datePublished": "2026-10-10", "dateModified": "2026-10-10"}, {"@type": "SoftwareApplication", "name": "Monero Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-monero.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Monero Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Monero Swap is a direct, non-custodial trade between XMR and another asset, usually BTC, locked by cryptography so both sides complete together or neither side moves at all."}}, {"@type": "Question", "name": "Does a Monero Swap need KYC or an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. The trade settles wallet-to-wallet with no sign-up and no identity verification, which is one of the main reasons people choose it over a custodial exchange."}}, {"@type": "Question", "name": "Why can't Monero use the same hash-locked contracts as Bitcoin?", "acceptedAnswer": {"@type": "Answer", "text": "Monero has no scripting language for conditional spends, so a Monero Swap instead uses adaptor signatures that tie the Monero-side key to the Bitcoin-side secret, achieving the same all-or-nothing result without on-chain scripts."}}, {"@type": "Question", "name": "How long does a Monero Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most of the wait is confirmation time on each chain — commonly around ten Monero blocks, roughly twenty minutes, plus however long the Bitcoin leg takes to confirm at the fee paid."}}, {"@type": "Question", "name": "Is a Monero Swap really trustless?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The locking scheme means revealing the secret that claims one leg automatically gives the other party the information needed to claim theirs, so neither side can take funds without the trade also completing for the counterpart."}}, {"@type": "Question", "name": "Can I check my Monero Swap transaction on an explorer?", "acceptedAnswer": {"@type": "Answer", "text": "You can verify your own transfer's confirmation status using your wallet's view key against an explorer such as xmrchain.net, though Monero's ring signatures and stealth addresses mean you cannot see other people's amounts the way you would on a transparent chain."}}, {"@type": "Question", "name": "What's the biggest risk in a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "The practical risks are an expired quote, an underpriced fee that delays confirmation, or sending to the wrong address — not a central vault being compromised, since a non-custodial swap never holds your funds in one place."}}]}]}</script>
 <style>
-:root{color-scheme:light;--paper:#f5f0e7;--ink:#302b25;--muted:#686056;--rule:#d5ccbd;--orange:#a9431f;--peach:#eddfcf;--white:#fffdf8}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65}a{color:inherit;text-underline-offset:4px}a:hover{color:var(--orange)}button{font:inherit}a:focus-visible,button:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:5px}img{object-fit:contain}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:1.12}h2{font-size:clamp(29px,3.3vw,42px);letter-spacing:-1px}h3{font-size:25px}p{color:var(--muted)}.folio{max-width:1180px;margin:auto;padding:0 36px}.skip-paper{position:absolute;top:-100px;background:var(--white);padding:12px;z-index:5}.skip-paper:focus{top:12px}.masthead{display:flex;align-items:center;justify-content:space-between;gap:25px;min-height:100px;border-bottom:1px solid var(--ink)}.mastmark{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Georgia,serif;font-size:23px;line-height:1.05}.mastmark small{display:block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:7px;color:var(--muted)}.mastmark img{width:36px;height:36px}.edition-nav{display:flex;align-items:center;gap:26px;font-size:13px}.edition-nav a{text-decoration:none}.ink-link{display:inline-flex;align-items:center;justify-content:center;gap:24px;padding:13px 20px;background:var(--ink);color:var(--white);text-decoration:none;font-size:14px;font-weight:700}.ink-link:hover{background:var(--orange);color:white}.edition-nav .ink-link{color:var(--white)}.opening-spread{display:grid;grid-template-columns:1.15fr 1fr;gap:70px;align-items:start;padding:52px 0 44px}.folio-label{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--orange);margin-bottom:22px}h1{font-size:clamp(60px,7.8vw,96px);letter-spacing:-5px;line-height:.96;margin-bottom:26px}h1 span{display:block;color:var(--orange)}.opening-copy{font-size:18px;max-width:480px;line-height:1.7;margin-bottom:24px}.opening-foot{margin-top:25px;display:flex;flex-wrap:wrap;gap:9px 20px;font-size:12px;color:var(--muted)}.swap-slip{cursor:pointer;background:var(--white);position:relative;border:1px solid var(--rule);box-shadow:7px 8px 0 var(--peach);padding:25px 28px 28px;transition:transform .2s,box-shadow .2s}.swap-slip:hover{transform:translateY(-3px);box-shadow:7px 11px 0 var(--peach)}.slip-head{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding-bottom:17px;border-bottom:1px solid var(--ink)}.slip-head b{color:var(--orange)}.slip-row{padding:20px 0 15px}.slip-label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.slip-asset{display:flex;align-items:center;gap:12px}.slip-asset img{width:38px;height:38px}.slip-asset strong{font-family:Georgia,serif;font-weight:400;font-size:30px;line-height:1.2}.slip-asset small{margin-left:auto;color:var(--muted);font-size:12px}.slip-arrow{display:flex;align-items:center;gap:14px;color:var(--orange);font-size:24px;line-height:1}.slip-arrow:after{content:"";height:1px;background:var(--rule);flex:1}.slip-terms{margin-top:5px;padding:16px 0;border-top:1px dashed var(--rule);display:grid;gap:8px;font-size:12px}.slip-terms div{display:flex;justify-content:space-between;gap:18px}.slip-terms span:first-child{color:var(--muted)}.slip-terms span:last-child{text-align:right}.slip-action{display:flex;justify-content:space-between;background:var(--orange);color:white;padding:14px 16px;font-size:14px;font-weight:700;margin-top:7px}.pair-edition{border-top:1px solid var(--ink);padding:30px 0 40px}.section-intro{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:26px}.section-intro>p{font-size:13px;max-width:260px}.pair-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}.route-story{border-left:1px solid var(--rule);padding-left:22px}.route-story:first-child{border-left:0;padding-left:0}.route-emblems{display:flex;align-items:center;gap:10px;margin-bottom:14px}.route-emblems img{width:29px;height:29px}.route-emblems span{color:var(--muted)}.route-story h3{font-size:25px;margin-bottom:12px}.route-story p{font-size:14px;margin-bottom:14px}.route-story>a{font-size:13px;font-weight:700;color:var(--orange)}.reading-spread{display:grid;grid-template-columns:1.3fr 1fr;border-top:1px solid var(--ink);gap:60px;padding:40px 0}.instruction-list{list-style:none;padding:0;margin:26px 0 0;counter-reset:sequence}.instruction-list li{counter-increment:sequence;position:relative;padding:0 0 22px 48px}.instruction-list li:before{content:"0" counter(sequence);position:absolute;left:0;top:0;color:var(--orange);font-family:Georgia,serif;font-size:24px}.instruction-list h3{font-family:Arial,sans-serif;font-size:16px;font-weight:700;line-height:1.5;margin-bottom:5px}.instruction-list p{font-size:14px}.fee-column{background:var(--peach);padding:27px}.fee-column h2{font-size:31px}.fee-column dl{margin:22px 0 0}.fee-column dt{font-size:14px;font-weight:700;margin-top:16px}.fee-column dd{font-size:14px;color:var(--muted);margin:3px 0 0}.fee-column>p{font-size:13px;border-top:1px solid #cdbba6;padding-top:17px;margin-top:20px}.help-desk{border-top:1px solid var(--ink);padding:36px 0}.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin:24px 0}.help-grid h3{font-size:23px;margin-bottom:10px}.help-grid p{font-size:14px}.transaction-note{background:var(--white);border-left:3px solid var(--orange);padding:15px 19px;font-size:14px}.transaction-note a{color:var(--orange);font-weight:700}.watch-spread{border-top:1px solid var(--ink);padding:36px 0;display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:start}.watch-spread h2{margin-bottom:16px}.watch-spread p{font-size:14px}.film-mount{aspect-ratio:16/9;background:#292821;width:100%;overflow:hidden}.film-cover{position:relative;width:100%;height:100%;border:0;cursor:pointer;padding:0;background:#292821;display:block;color:white}.film-cover img{width:100%;height:100%;object-fit:cover;display:block}.film-cover:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.85))}.film-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;height:62px;width:62px;background:var(--orange);display:grid;place-items:center;font-size:23px;z-index:1;padding-left:3px}.film-caption{position:absolute;bottom:13px;left:18px;right:18px;text-align:left;z-index:1;font-size:13px}.film-mount iframe{border:0;width:100%;height:100%}.film-credit{margin-top:9px;font-size:11px;color:var(--muted)}.monero-circle{margin-top:26px;padding:20px;background:var(--peach);border:1px solid var(--rule)}.monero-circle h3{font-size:24px;margin-bottom:9px}.monero-circle>a{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:var(--orange)}.answers-spread{border-top:1px solid var(--ink);padding:36px 0 40px;display:grid;grid-template-columns:.65fr 1.35fr;gap:48px}.answers-spread .folio-label{margin-bottom:12px}.answer-leaves details{border-bottom:1px solid var(--rule);padding:16px 0}.answer-leaves details:first-child{padding-top:0}.answer-leaves summary{cursor:pointer;font-size:15px;font-weight:700;padding-right:14px}.answer-leaves p{font-size:14px;margin-top:12px}.colophon{border-top:1px solid var(--ink);padding:23px 0 30px;display:flex;justify-content:space-between;gap:20px;font-size:12px}.colophon p{max-width:580px}.colophon>a{white-space:nowrap;color:var(--orange);font-weight:700}@media(max-width:850px){.opening-spread{gap:32px}.folio{padding:0 25px}.edition-nav{gap:18px}.edition-nav>a:not(.ink-link){display:none}.reading-spread{gap:28px}.watch-spread{gap:28px}.answers-spread{gap:28px}.section-intro{display:block}.section-intro>p{max-width:none;margin-top:12px}h1{letter-spacing:-3px}.slip-asset small{display:none}.swap-slip{padding:22px}}@media(max-width:620px){.folio{padding:0 20px}.masthead{min-height:82px;gap:12px}.mastmark{font-size:19px;gap:9px}.mastmark img{width:30px;height:30px}.mastmark small{font-size:8px;letter-spacing:1.2px}.edition-nav .ink-link{padding:10px 12px;font-size:12px;gap:12px}.opening-spread{grid-template-columns:1fr;padding:32px 0;gap:30px}h1{font-size:69px}h1 span{display:inline}.opening-copy{font-size:16px;margin-bottom:20px}.folio-label{margin-bottom:18px}.opening-foot{margin-top:20px}.swap-slip{margin-right:7px}.slip-asset small{display:block}.pair-columns,.reading-spread,.watch-spread,.answers-spread{grid-template-columns:1fr}.pair-columns{gap:22px}.route-story,.route-story:first-child{border:0;border-top:1px solid var(--rule);padding:20px 0 0}.route-emblems{float:right;margin-left:12px}.route-story h3{font-size:23px}.route-story p{margin-bottom:9px}.pair-edition{padding:27px 0 30px}.reading-spread,.help-desk,.watch-spread,.answers-spread{padding:30px 0}.reading-spread{gap:5px}.help-grid{grid-template-columns:1fr;gap:22px}.watch-spread{gap:25px}.answers-spread{gap:25px}.colophon{flex-direction:column;gap:13px}.film-play{height:52px;width:52px}.film-caption{font-size:12px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.swap-slip:hover{transform:none}}
+:root{--bg:#FAFBFD;--surface:#FFFFFF;--text:#111725;--muted:#586072;--accent:#4F46E5;--accent-ink:#FFFFFF;--radius:12px;--display:"Sora";--body:"Inter"}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  min-width: 280px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  color: var(--text);
+  background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42rem), var(--bg);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+a:hover {
+  color: color-mix(in srgb, var(--accent) 76%, var(--text));
+}
+a:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+}
+img,
+svg {
+  max-width: 100%;
+  vertical-align: middle;
+}
+img {
+  height: auto;
+}
+input,
+output {
+  font-family: var(--body);
+}
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  font-family: var(--display);
+  text-wrap: balance;
+}
+p,
+ul,
+ol,
+blockquote,
+figure {
+  margin: 0;
+}
+.c6f1419 {
+  width: min(100% - 4rem, 1120px);
+  margin-inline: auto;
+}
+.c0bccaa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 92px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+.c5c5cf4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+.c1dcf89 {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 23%, transparent);
+  border-radius: calc(var(--radius) * 0.55);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.cd58f48 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 42px;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: calc(var(--radius) * 0.65);
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  font-size: 0.85rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+.cd58f48:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+.c1b1e34 {
+  padding-block: 1.4rem 0.5rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.c688e27 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.7rem;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  list-style: none;
+}
+.c688e27 ol,
+.c688e27 ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.c688e27 li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.c688e27 li + li::before {
+  content: "/";
+  color: color-mix(in srgb, var(--muted) 60%, transparent);
+}
+.c688e27 a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.c688e27 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.c688e27 [aria-current="page"] {
+  color: var(--text);
+}
+.c297ed9 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+}
+.c145e6b {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: calc(var(--radius) * 2);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.c145e6b::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.c297ed9 h1 {
+  max-width: 960px;
+  margin: 0;
+  font-size: clamp(2.6rem, 6.1vw, 5.2rem);
+  font-weight: 650;
+  line-height: 1.06;
+  letter-spacing: -0.06em;
+}
+.c297ed9 h1 em,
+.c297ed9 h1 strong,
+.c297ed9 h1 span {
+  color: var(--accent);
+}
+.c297ed9 h1 em {
+  font-style: normal;
+}
+.c9aec16 {
+  max-width: 720px;
+  margin: 1.5rem auto 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.65vw, 1.15rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+.cc624f7 {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin-top: clamp(2rem, 4vw, 3.2rem);
+  padding: clamp(1.2rem, 3.5vw, 2.6rem);
+  border: 1px solid color-mix(in srgb, var(--accent) 19%, var(--surface));
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 5%, var(--surface)), var(--surface) 48%);
+  box-shadow: 0 24px 65px -24px color-mix(in srgb, var(--text) 21%, transparent), 0 4px 14px -7px color-mix(in srgb, var(--accent) 16%, transparent);
+  text-align: left;
+}
+.cc624f7::before {
+  position: absolute;
+  inset: -1px 12% auto;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 0%, transparent), color-mix(in srgb, var(--accent) 65%, transparent), color-mix(in srgb, var(--accent) 0%, transparent));
+}
+.c5bbb0b {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.c5bbb0b h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+.c5bbb0b p {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.cc8de4c {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 1rem;
+}
+.c1f2478 {
+  min-width: 0;
+  padding: 1.4rem 1.5rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: calc(var(--radius) * 0.7);
+  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.c1f2478:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 9%, transparent);
+}
+.c9d6c6e {
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), color-mix(in srgb, var(--accent) 3%, var(--surface)));
+}
+.ce32b5d {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 550;
+}
+#amount {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 0%, transparent);
+  font-family: var(--body);
+  font-size: clamp(1.7rem, 3vw, 2.65rem);
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  letter-spacing: -0.045em;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+#amount::-webkit-inner-spin-button,
+#amount::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+#amount::placeholder {
+  color: var(--muted);
+  opacity: 0.65;
+}
+#amount:focus-visible {
+  outline-offset: 3px;
+  outline-width: 2px;
+}
+#amount[aria-invalid="true"] {
+  text-decoration: underline wavy;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+#received {
+  display: block;
+  min-height: 1.3em;
+  color: var(--text);
+  font-size: clamp(1.7rem, 3vw, 2.65rem);
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+.c0df4af {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+.c052a8a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-inline: 0.15rem;
+}
+.c0cabb6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  width: 48px;
+  min-height: 48px;
+  padding: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+  border-radius: calc(var(--radius) * 0.55);
+  background: var(--surface);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--text) 4%, transparent);
+  font-size: 0.65rem;
+  line-height: 1.2;
+  text-align: center;
+}
+.c0cabb6 img,
+.c0cabb6 svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+.c621eaf {
+  color: var(--accent);
+  font-size: 1.3rem;
+}
+.cbbea63 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+  margin-top: 1.4rem;
+}
+.c273a9a {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.8rem;
+}
+.c273a9a > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.c273a9a dt {
+  color: var(--muted);
+}
+.c273a9a dd {
+  margin: 0;
+  color: var(--text);
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.cc9c024 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 56px;
+  padding: 0.9rem 1.3rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 85%, var(--text));
+  border-radius: calc(var(--radius) * 0.65);
+  color: var(--accent-ink);
+  background: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 85%, var(--text)));
+  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--accent) 45%, transparent);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.cc9c024:hover {
+  transform: translateY(-2px);
+  color: var(--accent-ink);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 94%, var(--text)), color-mix(in srgb, var(--accent) 78%, var(--text)));
+  box-shadow: 0 12px 28px -9px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.cc9c024:active {
+  transform: translateY(0);
+}
+.cc9c024 span:last-child {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+.c4e464e {
+  min-height: 1.5em;
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.c4e464e[data-invalid="true"] {
+  color: var(--text);
+  font-weight: 600;
+}
+.c0a9222 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-block: 1.6rem 4.5rem;
+  padding: 1rem 0;
+  border-block: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  list-style: none;
+}
+.c0a9222 li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+.c0a9222 li + li {
+  border-left: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+}
+.c0a9222 li::before {
+  content: "✓";
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+.c8be37d {
+  margin-bottom: 4rem;
+  padding: clamp(1.25rem, 3.5vw, 2.75rem);
+  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 12px 35px -22px color-mix(in srgb, var(--text) 18%, transparent);
+}
+.c54098a {
+  margin: 0 0 1.6rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+.c38e1b8 {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.c2ecc38 {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-align: left;
+}
+.c2ecc38 caption {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: left;
+}
+.c2ecc38 th,
+.c2ecc38 td {
+  padding: 1.05rem 1.2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  vertical-align: top;
+}
+.c2ecc38 th {
+  width: 31%;
+  color: var(--muted);
+  font-weight: 500;
+}
+.c2ecc38 td {
+  font-weight: 550;
+}
+.c2ecc38 tr:nth-child(odd) {
+  background: color-mix(in srgb, var(--accent) 3%, var(--surface));
+}
+.c2ecc38 tr:last-child > * {
+  border-bottom: 0;
+}
+.c2ecc38 thead th {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  font-weight: 650;
+}
+.c87d5aa {
+  width: min(100%, 860px);
+  margin-inline: auto;
+}
+.cedb1d7 {
+  margin-block: 0 3.6rem;
+  padding-bottom: 3.2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+  scroll-margin-top: 2rem;
+}
+.c896ef2 {
+  margin: 0 0 1.25rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+.c4ba9b9 {
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.c4ba9b9 > * + * {
+  margin-top: 1.25rem;
+}
+.c4ba9b9 h3,
+.c4ba9b9 h4 {
+  margin-block: 2rem 0.75rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+.c4ba9b9 h4 {
+  font-size: 1.1rem;
+}
+.c4ba9b9 strong,
+.cbcfb16 strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.c4ba9b9 ul,
+.c4ba9b9 ol,
+.cbcfb16 ul,
+.cbcfb16 ol {
+  padding-left: 1.4rem;
+}
+.c4ba9b9 li,
+.cbcfb16 li {
+  padding-left: 0.3rem;
+}
+.c4ba9b9 li + li,
+.cbcfb16 li + li {
+  margin-top: 0.65rem;
+}
+.c4ba9b9 li::marker,
+.cbcfb16 li::marker {
+  color: var(--accent);
+}
+.c4ba9b9 li > ul,
+.c4ba9b9 li > ol {
+  margin-top: 0.65rem;
+}
+.c4ba9b9 blockquote {
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 calc(var(--radius) * 0.45) calc(var(--radius) * 0.45) 0;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+.c4ba9b9 blockquote p + p {
+  margin-top: 0.8rem;
+}
+.c4ba9b9 table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: calc(var(--radius) * 0.6);
+  background: var(--surface);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  text-align: left;
+  overscroll-behavior-inline: contain;
+}
+.c4ba9b9 table th,
+.c4ba9b9 table td {
+  min-width: 8rem;
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
+  vertical-align: top;
+}
+.c4ba9b9 table th {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  font-weight: 600;
+}
+.c4ba9b9 table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
+}
+.c4ba9b9 table tr:last-child td {
+  border-bottom: 0;
+}
+.c4ba9b9 table caption {
+  padding: 0.85rem 1.15rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: left;
+}
+.c4ba9b9 code,
+.c4ba9b9 pre {
+  border-radius: calc(var(--radius) * 0.3);
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 5%, var(--surface));
+  font-family: var(--body);
+  font-size: 0.9em;
+}
+.c4ba9b9 code {
+  padding: 0.15em 0.4em;
+}
+.c4ba9b9 pre {
+  overflow-x: auto;
+  padding: 1.2rem;
+}
+.c4ba9b9 pre code {
+  padding: 0;
+  background: color-mix(in srgb, var(--surface) 0%, transparent);
+}
+.c4ba9b9 figure img {
+  display: block;
+  border-radius: calc(var(--radius) * 0.7);
+}
+.c4ba9b9 figcaption {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.cdfda14 {
+  margin-block: 1rem;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: calc(var(--radius) * 0.7);
+  background: var(--surface);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.cdfda14:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.cdfda14[open] {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 8px 25px -14px color-mix(in srgb, var(--text) 15%, transparent);
+}
+.ccf73eb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.3rem 1.5rem;
+  border-radius: calc(var(--radius) * 0.7);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.04rem;
+  font-weight: 550;
+  line-height: 1.5;
+  list-style: none;
+  cursor: pointer;
+}
+.ccf73eb::-webkit-details-marker {
+  display: none;
+}
+.ccf73eb::after {
+  display: grid;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  content: "+";
+  border-radius: 50%;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  font-family: var(--body);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.cdfda14[open] > .ccf73eb::after {
+  content: "−";
+}
+.cbcfb16 {
+  padding: 0 1.5rem 1.5rem;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.cbcfb16 > * + * {
+  margin-top: 1rem;
+}
+.c5fe5fa {
+  margin-top: 4rem;
+  padding: 2.2rem 0 2.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+.c5fe5fa .c54098a {
+  margin-bottom: 1.2rem;
+  font-size: 1.35rem;
+}
+.c1719d3 {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cc6d88e {
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  border-radius: calc(var(--radius) * 0.45);
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+  font-size: 0.82rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.cc6d88e a,
+a.cc6d88e {
+  color: var(--text);
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.cc6d88e a:hover,
+a.cc6d88e:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+.c9c5cb0 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: 1rem;
+  padding-block: 1.7rem 2.2rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.c58c578 {
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.c0b22ee span {
+  color: var(--text);
+}
+@media (min-width: 1280px) {
+  .c297ed9 {
+    padding-top: 5.2rem;
+  }
+  .cc624f7 {
+    margin-top: 3.4rem;
+  }
+  .c1f2478 {
+    padding-block: 1.6rem 1.3rem;
+  }
+}
+@media (max-width: 900px) {
+  .c6f1419 {
+    width: min(100% - 3rem, 1120px);
+  }
+  .cc8de4c {
+    gap: 0.65rem;
+  }
+  .c1f2478 {
+    padding: 1.1rem;
+  }
+  .c052a8a {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .c0cabb6 {
+    width: 38px;
+    min-height: 38px;
+  }
+  .c0cabb6 img,
+  .c0cabb6 svg {
+    width: 25px;
+    height: 25px;
+  }
+  .c621eaf {
+    line-height: 1;
+  }
+  .c0a9222 {
+    margin-bottom: 3rem;
+  }
+}
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 1rem;
+  }
+  .c6f1419 {
+    width: calc(100% - 2rem);
+  }
+  .c0bccaa {
+    min-height: 76px;
+    gap: 0.75rem;
+  }
+  .c5c5cf4 {
+    gap: 0.5rem;
+    font-size: 1.08rem;
+  }
+  .cd58f48 {
+    min-height: 40px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.78rem;
+  }
+  .c1b1e34 {
+    padding-top: 1rem;
+  }
+  .c297ed9 {
+    padding-top: 2.4rem;
+  }
+  .c297ed9 h1 {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
+    letter-spacing: -0.05em;
+  }
+  .c9aec16 {
+    margin-top: 1.1rem;
+    line-height: 1.75;
+  }
+  .cc624f7 {
+    padding: 1.1rem;
+  }
+  .c5bbb0b {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1.1rem;
+  }
+  .cc8de4c {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.7rem;
+  }
+  .c1f2478 {
+    padding: 1.2rem;
+  }
+  #amount,
+  #received {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+  .c052a8a {
+    flex-direction: row;
+    gap: 0.8rem;
+    padding-block: 0.1rem;
+  }
+  .c0cabb6 {
+    width: 40px;
+    min-height: 40px;
+  }
+  .cbbea63 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .c273a9a {
+    font-size: 0.78rem;
+  }
+  .cc9c024 {
+    min-height: 54px;
+  }
+  .c0a9222 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-block: 1.4rem 2.6rem;
+    padding-block: 0.5rem;
+  }
+  .c0a9222 li {
+    justify-content: flex-start;
+    padding: 0.7rem 1rem;
+  }
+  .c0a9222 li + li {
+    border-top: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
+    border-left: 0;
+  }
+  .c8be37d {
+    margin-bottom: 2.8rem;
+    padding: 1.2rem;
+  }
+  .c54098a {
+    margin-bottom: 1.2rem;
+  }
+  .c2ecc38 {
+    font-size: 0.82rem;
+  }
+  .c2ecc38 th,
+  .c2ecc38 td {
+    padding: 0.8rem 0.6rem;
+  }
+  .c2ecc38 th {
+    width: 38%;
+  }
+  .cedb1d7 {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.3rem;
+  }
+  .c4ba9b9 {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .c4ba9b9 h3 {
+    font-size: 1.2rem;
+  }
+  .c4ba9b9 blockquote {
+    padding: 1rem 1.15rem;
+  }
+  .ccf73eb {
+    gap: 0.9rem;
+    padding: 1.1rem;
+    font-size: 0.98rem;
+  }
+  .cbcfb16 {
+    padding: 0 1.1rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  .c5fe5fa {
+    margin-top: 2.6rem;
+    padding-block: 1.8rem;
+  }
+  .c9c5cb0 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding-block: 1.4rem 1.8rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none;
+    animation: none;
+  }
+  .cc9c024:hover {
+    transform: none;
+  }
+}
+@media print {
+  body {
+    background: var(--bg);
+  }
+  .c6f1419,
+  .c87d5aa {
+    width: 100%;
+  }
+  .cd58f48,
+  .cc9c024 {
+    display: none;
+  }
+  .c297ed9 {
+    padding-top: 1.5rem;
+  }
+  .c297ed9 h1 {
+    font-size: 2.6rem;
+  }
+  .cc624f7,
+  .c8be37d,
+  .cdfda14 {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+  .c4ba9b9 h3,
+  .c896ef2 {
+    break-after: avoid;
+  }
+  .c4ba9b9 table {
+    display: table;
+    overflow: visible;
+  }
+}
 </style>
 </head>
 <body>
-<a class="skip-paper" href="#main-edition">Skip to Monero swap guide</a>
-<div class="folio">
-<header class="masthead">
-<a class="mastmark" href="/" aria-label="Swap Monero home"><img src="xmr.png" alt="" width="36" height="36"><span>Monero<small>Swap &amp; swap guide</small></span></a>
-<nav class="edition-nav" aria-label="Monero swap navigation"><a href="#monero-routes">Swap Monero pairs</a><a href="#monero-method">How to swap Monero</a><a class="ink-link" href="/dashboard/">Swap Monero <span aria-hidden="true">↗</span></a></nav>
-</header>
-<main id="main-edition">
-<section class="opening-spread" aria-labelledby="monero-title">
-<div>
-<p class="folio-label">XMR swaps · BTC / USDT / ETH</p>
-<h1 id="monero-title">Swap <span>Monero</span></h1>
-<p class="opening-copy">Swap Monero for Bitcoin, Tether or Ethereum. Choose what you want to receive, review the swap, then send XMR from your wallet.</p>
-<a class="ink-link" href="/dashboard/">Start your Monero swap <span aria-hidden="true">↗</span></a>
-<div class="opening-foot"><span>01 Choose a pair</span><span>02 Review the rate</span><span>03 Send XMR</span></div>
+<div class="c6f1419">
+  <header class="c0bccaa">
+    <div class="c5c5cf4"><span class="c1dcf89" aria-hidden="true">⇄</span><span>Exchange</span></div>
+    <a class="cd58f48" href="dashboard/">Open app <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="c1b1e34"><nav class="c688e27" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Monero Swap</span></nav></div>
+  <section class="c297ed9" aria-labelledby="hero-title">
+    <div class="c145e6b">A direct route to your next asset</div>
+    <h1 id="hero-title">Monero <em>Swap</em>.</h1>
+    <p class="c9aec16">A Monero Swap trades XMR for another asset, most often BTC, directly between two wallets with no exchange ever holding either coin. The trade is locked by cryptography rather than by trust: both sides either complete together or neither side moves, and you never send your funds anywhere before the other leg is guaranteed. Because Monero hides its own ledger by default, that process also has to work around this privacy rather than through a block explorer, which is what makes the mechanics worth understanding before you use one.</p>
+    <div class="cc624f7" role="group" aria-labelledby="exchange-title">
+      <div class="c5bbb0b">
+        <h2 id="exchange-title">Your exchange</h2>
+        <p>One route. Every detail in view.</p>
+      </div>
+      <div class="cc8de4c">
+        <div class="c1f2478">
+          <label class="ce32b5d" for="amount">You pay</label>
+          <input id="amount" name="amount" type="number" inputmode="decimal" min="1" max="1000000" step="any" value="1000" required aria-describedby="amount-help amount-message" aria-invalid="false">
+          <span class="c0df4af" id="amount-help">From 1 to 1,000,000 units</span>
+        </div>
+        <div class="c052a8a" role="group" aria-label="Exchange route">
+          <span class="c0cabb6"><img src="assets/tokens/xmr.svg" alt="Monero" width="28" height="28"></span>
+          <span class="c621eaf" role="img" aria-label="to">→</span>
+          <span class="c0cabb6"><img src="assets/tokens/btc.svg" alt="Bitcoin" width="28" height="28"></span>
+        </div>
+        <div class="c1f2478 c9d6c6e">
+          <label class="ce32b5d" for="received">You receive</label>
+          <output id="received" for="amount" aria-live="polite" aria-atomic="true">—</output>
+          <span class="c0df4af">After network fee · destination units</span>
+        </div>
+      </div>
+      <div class="cbbea63">
+        <dl class="c273a9a">
+          <div><dt>Rate</dt><dd><output id="rate" for="amount">—</output></dd></div>
+          <div><dt>Network fee</dt><dd><output id="network-fee" for="amount">—</output></dd></div>
+        </dl>
+        <a class="cc9c024" href="dashboard/"><span>Continue to exchange</span><span aria-hidden="true">→</span></a>
+      </div>
+      <p class="c4e464e" id="amount-message" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+  <ul class="c0a9222" aria-label="Exchange features">
+    <li>Non-custodial</li>
+    <li>On-chain</li>
+    <li>No sign-up</li>
+    <li>Transparent fees</li>
+  </ul>
+  <section class="c8be37d" aria-labelledby="facts-title">
+    <h2 class="c54098a" id="facts-title">Key facts</h2>
+    <div class="c38e1b8" tabindex="0" role="region" aria-label="Key facts table"><table class="c2ecc38"><tbody><tr><th scope="row">Assets</th><td>XMR and BTC, traded directly</td></tr>
+<tr><th scope="row">Custody</th><td>Non-custodial — neither side holds funds in escrow</td></tr>
+<tr><th scope="row">Mechanism</th><td>Atomic swap via adaptor signatures</td></tr>
+<tr><th scope="row">Account</th><td>None — no sign-up, no KYC</td></tr>
+<tr><th scope="row">Monero confirmations</th><td>10 blocks (~20 minutes) typical</td></tr>
+<tr><th scope="row">Privacy tools</th><td>Ring signatures and stealth addresses</td></tr></tbody></table></div>
+  </section>
+  <main class="c87d5aa" id="content">
+    <section class="cedb1d7"><h2 class="c896ef2">What a Monero Swap Is</h2><div class="c4ba9b9"><strong>A Monero Swap is a peer-to-peer trade that exchanges XMR for BTC, or the reverse, using a locking scheme that only ever releases both sides together or neither side at all.</strong> There is no shared custodian holding a pool of coins and no order book matching strangers' balances inside one company's database. Instead, two parties generate a trade that is cryptographically tied to a single secret: once that secret is revealed to claim one leg, it can be extracted and used to claim the other, so the swap either finishes in full or reverts to nothing lost. The process is documented in detail in the <a href="https://getmonero.org/" rel="nofollow noopener" target="_blank">Monero docs</a>, which is also the canonical reference for the wallet software most swap tools build on.</div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Why Monero's Privacy Shapes a Monero Swap</h2><div class="c4ba9b9">Monero's ledger does not show sender, receiver or amount the way Bitcoin's does, and that design choice is exactly why this kind of trade cannot be built the same way a Bitcoin-to-Ethereum swap is. Every protocol has to prove a payment happened without being able to simply look it up on a public, labeled address.<h3>Ring Signatures and Stealth Addresses</h3>Each Monero transaction is signed with a <em>ring signature</em> that mixes the real spender's key among several decoys, so an outside observer has no way to know which of the group actually authorized the spend. The receiving address is a one-time <em>stealth address</em> generated fresh for that payment, meaning no two transfers to the same wallet look connected on-chain. Background on the design is summarized on <a href="https://en.wikipedia.org/wiki/Monero" rel="nofollow noopener" target="_blank">Wikipedia's Monero entry</a> for anyone comparing it against a transparent chain.<h3>Confirmation Depth Before You Trust a Transfer</h3>Because you cannot casually trace a Monero payment the way you would trace a Bitcoin one, swap software leans harder on confirmation count rather than on visual inspection. A transfer is typically treated as final after ten Monero blocks, roughly twenty minutes, and a cautious counterpart will wait for that depth before releasing their side. You can still verify your own transaction's status with your wallet's private view key against an explorer such as <a href="https://xmrchain.net/" rel="nofollow noopener" target="_blank">xmrchain.net</a>, which reads public block data without exposing anyone else's amounts.</div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Atomic Swap Mechanics Behind a Monero Swap</h2><div class="c4ba9b9">The core trick that makes a trustless trade possible is called an atomic swap, and the Monero-Bitcoin pairing uses a variant built from adaptor signatures rather than the hash-locked contracts common elsewhere.<h3>Hash-Locked Contracts Without a Smart Contract Chain</h3>A typical atomic swap uses a hashed time-locked contract on each chain: both sides lock funds behind the same secret hash, and revealing the secret to claim one lock automatically makes it public enough to claim the other. Bitcoin supports this natively through its scripting language, which is why the Bitcoin leg of this trade is the easier half to build.<h3>Why Monero Can't Use Classic HTLCs</h3>Monero has no scripting language and no way to write a conditional lock directly into a transaction, so a straightforward HTLC is not available on its side. Protocols work around this with adaptor signatures: a cryptographic value tied to Bitcoin's secret is woven into the signature needed to spend the Monero leg, so revealing one key to take the Bitcoin automatically hands the counterpart the key needed to take the Monero. Neither party needs a shared custodian or a third-chain smart contract for the trade to settle.</div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Monero Swap Fees, Confirmations and Timing</h2><div class="c4ba9b9">Timing on this kind of trade is set by block confirmations on both chains rather than by any party's processing speed, and that is also where most of the cost sits. You pay ordinary network fees on each chain plus whatever small spread the swap tool or counterparty builds into the quoted rate; there is no deposit held anywhere waiting on a withdrawal queue, so once both sides confirm the trade is simply done.<table><thead><tr><th>Stage</th><th>What happens</th><th>Typical time</th></tr></thead><tbody><tr><td>Trade setup</td><td>Both sides agree on amount and lock the trade parameters</td><td>Under a minute</td></tr><tr><td>Bitcoin leg</td><td>Funds locked and confirmed on Bitcoin</td><td>~10–60 minutes, fee-dependent</td></tr><tr><td>Monero leg</td><td>Funds locked and confirmed on Monero, ~10 blocks</td><td>~20 minutes</td></tr></tbody></table></div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Monero Swap Step by Step</h2><div class="c4ba9b9">The sequence below is the same shape used by most non-custodial XMR-BTC tools, whether you run a desktop client or use a swap widget.<ul><li>Pick the direction, XMR to BTC or BTC to XMR, and enter the amount to see the quoted rate.</li><li>Generate or connect the receiving wallet for the asset you are getting back — never an exchange account.</li><li>Send the locked leg from your own wallet and wait for it to reach the required confirmation depth.</li><li>The counterpart's leg unlocks automatically once your lock is confirmed, using the shared cryptographic key.</li><li>Confirm the funds landed in your wallet before closing the session; the trade is final once both legs settle.</li></ul></div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Self-Custody and Security for a Monero Swap</h2><div class="c4ba9b9">Every step of this exchange happens from keys you control, which removes the single biggest risk of a custodial exchange: a counterparty that can freeze, delay or simply lose your balance.<h3>No Account, No KYC, No Custodian</h3>There is nothing to sign up for and nothing to verify your identity against, because the trade settles wallet-to-wallet rather than inside a company's ledger. That also means there is no support desk to appeal to if you make a mistake, so double-check the receiving address and the quoted amount before you lock your side.<h3>What Can Still Go Wrong</h3>The realistic risks are a quote that expires before your transaction confirms, a fee set too low to confirm in time, or sending to the wrong address — not a hack of some central vault, since there isn't one. Reading the full instructions in the <a href="https://getmonero.org/" rel="nofollow noopener" target="_blank">Monero documentation</a> before your first trade covers the wallet-side mistakes that cause almost every stuck swap.</div></section>
+<section class="cedb1d7"><h2 class="c896ef2">Monero Swap vs Custodial Exchange</h2><div class="c4ba9b9">A custodial exchange lets you trade XMR for BTC instantly against its own order book, but it requires an account, holds your coins while the order sits open, and can pause withdrawals at its own discretion. This kind of trade moves slower, bound by confirmation times on both chains, in exchange for never handing custody to anyone. Listing sites such as <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a> track volume across many swap and bridge protocols if you want to see how this pairing compares to other non-custodial routes before picking a tool. For anyone who treats privacy and self-custody as the point of holding Monero in the first place, the slower non-custodial route is the one that keeps that guarantee intact.</div></section>
+    <details class="cdfda14"><summary class="ccf73eb">What is a Monero Swap?</summary><div class="cbcfb16">A Monero Swap is a direct, non-custodial trade between XMR and another asset, usually BTC, locked by cryptography so both sides complete together or neither side moves at all.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">Does a Monero Swap need KYC or an account?</summary><div class="cbcfb16">No. The trade settles wallet-to-wallet with no sign-up and no identity verification, which is one of the main reasons people choose it over a custodial exchange.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">Why can't Monero use the same hash-locked contracts as Bitcoin?</summary><div class="cbcfb16">Monero has no scripting language for conditional spends, so a Monero Swap instead uses adaptor signatures that tie the Monero-side key to the Bitcoin-side secret, achieving the same all-or-nothing result without on-chain scripts.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">How long does a Monero Swap take?</summary><div class="cbcfb16">Most of the wait is confirmation time on each chain — commonly around ten Monero blocks, roughly twenty minutes, plus however long the Bitcoin leg takes to confirm at the fee paid.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">Is a Monero Swap really trustless?</summary><div class="cbcfb16">Yes. The locking scheme means revealing the secret that claims one leg automatically gives the other party the information needed to claim theirs, so neither side can take funds without the trade also completing for the counterpart.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">Can I check my Monero Swap transaction on an explorer?</summary><div class="cbcfb16">You can verify your own transfer's confirmation status using your wallet's view key against an explorer such as xmrchain.net, though Monero's ring signatures and stealth addresses mean you cannot see other people's amounts the way you would on a transparent chain.</div></details>
+<details class="cdfda14"><summary class="ccf73eb">What's the biggest risk in a Monero Swap?</summary><div class="cbcfb16">The practical risks are an expired quote, an underpriced fee that delays confirmation, or sending to the wrong address — not a central vault being compromised, since a non-custodial swap never holds your funds in one place.</div></details>
+  </main>
+  <section class="c5fe5fa c87d5aa" aria-labelledby="sources-title">
+    <h2 class="c54098a" id="sources-title">Sources</h2>
+    <ul class="c1719d3"><li><a class="cc6d88e" href="https://getmonero.org/" rel="nofollow noopener" target="_blank">Monero documentation</a></li>
+<li><a class="cc6d88e" href="https://xmrchain.net/" rel="nofollow noopener" target="_blank">Monero block explorer</a></li>
+<li><a class="cc6d88e" href="https://en.wikipedia.org/wiki/Monero" rel="nofollow noopener" target="_blank">Monero — Wikipedia</a></li>
+<li><a class="cc6d88e" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
+  </section>
+  <footer class="c9c5cb0">
+    <span class="c58c578">Exchange</span>
+    <p class="c0b22ee">Updated <span>Updated Oct 10, 2026</span></p>
+  </footer>
 </div>
-<div class="swap-slip" id="monero-ticket" role="link" tabindex="0" aria-label="Open the dashboard to swap Monero and review your swap rate">
-<div class="slip-head"><b>Monero swap</b><span>XMR → BTC</span></div>
-<div class="slip-row"><span class="slip-label">You send</span><div class="slip-asset"><img src="xmr.png" width="38" height="38" alt="Monero logo"><strong>Monero</strong><small>XMR</small></div></div>
-<div class="slip-arrow" aria-hidden="true">↓</div>
-<div class="slip-row"><span class="slip-label">You receive</span><div class="slip-asset"><img src="btc.png" width="38" height="38" alt="Bitcoin logo"><strong>Bitcoin</strong><small>BTC</small></div></div>
-<div class="slip-terms"><div><span>Exchange rate</span><span>Review in dashboard</span></div><div><span>Send amount</span><span>Choose your XMR amount</span></div><div><span>Receiving network</span><span>Bitcoin</span></div></div>
-<span class="slip-action">Open your Monero swap <span aria-hidden="true">↗</span></span>
-</div>
-</section>
-<section class="pair-edition" id="monero-routes" aria-labelledby="route-title">
-<div class="section-intro"><h2 id="route-title">Swap Monero to BTC, USDT or ETH: check the live rate</h2><p>Start with the asset and network your receiving wallet accepts.</p></div>
-<div class="pair-columns">
-<article class="route-story"><div class="route-emblems"><img src="xmr.png" alt="Monero" width="29" height="29" loading="lazy"><span aria-hidden="true">→</span><img src="btc.png" alt="Bitcoin" width="29" height="29" loading="lazy"></div><h3>Monero to Bitcoin</h3><p>Receive BTC at your Bitcoin address. Check the net Bitcoin amount after swap costs before sending XMR.</p><a href="/dashboard/">Swap Monero to BTC ↗</a></article>
-<article class="route-story"><div class="route-emblems"><img src="xmr.png" alt="Monero" width="29" height="29" loading="lazy"><span aria-hidden="true">→</span><img src="usdt.png" alt="Tether" width="29" height="29" loading="lazy"></div><h3>Monero to Tether</h3><p>Receive USDT on the network selected in your order. Match that network to your wallet’s USDT deposit network.</p><a href="/dashboard/">Swap Monero to USDT ↗</a></article>
-<article class="route-story"><div class="route-emblems"><img src="xmr.png" alt="Monero" width="29" height="29" loading="lazy"><span aria-hidden="true">→</span><img src="eth.png" alt="Ethereum" width="29" height="29" loading="lazy"></div><h3>Monero to Ethereum</h3><p>Choose ETH and verify the receiving chain. An address beginning with 0x alone does not identify the network.</p><a href="/dashboard/">Swap Monero to ETH ↗</a></article>
-</div>
-</section>
-<div class="reading-spread">
-<section id="monero-method" aria-labelledby="method-title"><h2 id="method-title">Swap Monero without KYC: how the process works</h2><ol class="instruction-list">
-<li><h3>Choose your amount and destination</h3><p>Open the dashboard, select XMR as the asset to send, and choose the receiving coin. Paste its receiving address and check the network.</p></li>
-<li><h3>Read the swap details</h3><p>Review the rate, expected payout, minimum amount and any deposit deadline. Keep enough XMR in your wallet for the sending fee.</p></li>
-<li><h3>Send XMR and follow the order</h3><p>Send the requested amount to the order’s Monero address. The service releases the receiving asset after your Monero transaction confirms and the order is processed. Save the order ID.</p></li>
-</ol></section>
-<section class="fee-column" aria-labelledby="fee-title"><h2 id="fee-title">How much does it cost to swap Monero?</h2><dl><dt>The XMR sending fee</dt><dd>Your Monero wallet charges a network fee to broadcast the deposit.</dd><dt>The swap cost</dt><dd>A service fee or spread can be included in the exchange rate. Compare the final amount you receive.</dd><dt>The payout network fee</dt><dd>Sending BTC, USDT or ETH has its own network cost. Check whether it is included in the quote or deducted separately.</dd></dl><p>A floating rate moves with the market. A fixed-rate offer applies only under its stated amount and timing conditions.</p></section>
-</div>
-<section class="help-desk" aria-labelledby="help-title"><h2 id="help-title">Monero swap returned less than the quote?</h2><div class="help-grid">
-<article><h3>Deposit still pending?</h3><p>Check whether your wallet broadcast the transaction and whether it has confirmations. A pending deposit is not a reason to send it twice.</p></article>
-<article><h3>Quote expired?</h3><p>Before sending, create a fresh order. If you already sent XMR, keep the transaction hash and contact the order’s support with your order ID.</p></article>
-<article><h3>Payout not visible?</h3><p>Check the order for a payout transaction hash. Then check the receiving network, address and wallet sync status. Report a mismatch to support.</p></article>
-</div><p class="transaction-note">Check your transaction: <a href="https://monerowat.ch/" target="_blank" rel="noopener noreferrer">look up your XMR transaction hash on MoneroWatch ↗</a>. An explorer shows confirmation information; it does not publicly display your Monero transfer amount.</p></section>
-<section class="watch-spread" aria-labelledby="watch-title">
-<div><h2 id="watch-title">How to swap Monero in a wallet: video guide</h2><div class="film-mount" id="wallet-film"><button class="film-cover" type="button" id="wallet-film-play" aria-label="Play How to Swap Crypto through Ledger, by Ledger"><img src="https://i.ytimg.com/vi/6yys3210G8g/hqdefault.jpg" alt="How to Swap Crypto through Ledger video thumbnail" width="480" height="360" loading="lazy"><span class="film-play" aria-hidden="true">▶</span><span class="film-caption">Watch Ledger’s wallet swap walkthrough</span></button></div><p class="film-credit">Ledger · How to Swap Crypto through Ledger · Published 10 February 2022</p></div>
-<div><p>The wallet walkthrough covers choosing assets and reviewing a swap. For your Monero swap, follow the XMR deposit instructions in your order.</p><p style="margin-top:16px">Monero hides sending addresses, receiving addresses and amounts on its public blockchain. Read the <a href="https://www.getmonero.org/resources/user-guides/make-payment.html" target="_blank" rel="noopener noreferrer">official Monero payment guide</a> for confirmation and payment-proof details.</p><aside class="monero-circle" aria-labelledby="community-title"><h3 id="community-title">Monero community discussions</h3><p>Explore wallet questions, transaction experiences and ongoing Monero discussions.</p><a href="https://www.reddit.com/r/Monero/" target="_blank" rel="noopener noreferrer">Read wallet and transfer discussions on r/Monero ↗</a></aside></div>
-</section>
-<section class="answers-spread" aria-labelledby="faq-title"><div><p class="folio-label">Amounts · networks · confirmations</p><h2 id="faq-title">Monero swap questions, answered</h2></div><div class="answer-leaves">
-<details open><summary>Where can I swap Monero to BTC, USDT or ETH?</summary><p>Open the dashboard to choose your Monero swap. Check that your receiving asset and network are available, then review the quote before sending XMR.</p></details>
-<details><summary>How long does it take to swap Monero?</summary><p>The total time includes Monero deposit confirmations, order processing and confirmations on the receiving network. Follow the order status and its confirmation requirement for your transaction.</p></details>
-<details><summary>What is the minimum amount to swap Monero?</summary><p>Use the minimum displayed in the current quote. It depends on the pair and swap costs. Check the deposit amount again after allowing for your wallet’s XMR sending fee.</p></details>
-<details><summary>Which network should I choose to swap Monero to USDT?</summary><p>Choose a USDT network supported by both the order and your receiving wallet. The network on your wallet’s deposit screen must match the payout network exactly.</p></details>
-<details><summary>Do I need my seed phrase to swap Monero?</summary><p>No. Use your receiving address to set up the order and authorize the XMR payment inside your own wallet. Never enter your seed phrase or private keys into a swap form or support chat.</p></details>
-</div></section>
-</main>
-<footer class="colophon"><p>Monero swap guide · XMR to BTC, USDT and ETH.<br>Review the receiving network and net payout before sending.</p><a href="/dashboard/">Open the swap Monero dashboard ↗</a></footer>
-</div>
-<script type="application/ld+json" id="monero-structured-data">
-{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://insert_url/#webpage","url":"https://insert_url/","name":"Swap Monero","description":"Swap Monero to BTC, USDT or ETH with practical guidance on rates, fees, networks and confirmations.","inLanguage":"en","mentions":{"@type":"WebPage","@id":"https://www.reddit.com/r/Monero/","url":"https://www.reddit.com/r/Monero/","name":"Monero community discussions on Reddit"},"video":{"@id":"https://insert_url/#wallet-video"}},{"@type":"VideoObject","@id":"https://insert_url/#wallet-video","name":"How to Swap Crypto through Ledger","description":"Ledger’s wallet tutorial demonstrates choosing crypto assets and reviewing a swap.","thumbnailUrl":"https://i.ytimg.com/vi/6yys3210G8g/hqdefault.jpg","uploadDate":"2022-02-10","duration":"PT3M19S","embedUrl":"https://www.youtube-nocookie.com/embed/6yys3210G8g","publisher":{"@type":"Organization","name":"Ledger"}},{"@type":"FAQPage","@id":"https://insert_url/#faq","mainEntity":[{"@type":"Question","name":"Where can I swap Monero to BTC, USDT or ETH?","acceptedAnswer":{"@type":"Answer","text":"Open the dashboard to choose your Monero swap. Check that your receiving asset and network are available, then review the quote before sending XMR."}},{"@type":"Question","name":"How long does it take to swap Monero?","acceptedAnswer":{"@type":"Answer","text":"The total time includes Monero deposit confirmations, order processing and confirmations on the receiving network. Follow the order status and its confirmation requirement for your transaction."}},{"@type":"Question","name":"What is the minimum amount to swap Monero?","acceptedAnswer":{"@type":"Answer","text":"Use the minimum displayed in the current quote. It depends on the pair and swap costs. Check the deposit amount again after allowing for your wallet’s XMR sending fee."}},{"@type":"Question","name":"Which network should I choose to swap Monero to USDT?","acceptedAnswer":{"@type":"Answer","text":"Choose a USDT network supported by both the order and your receiving wallet. The network on your wallet’s deposit screen must match the payout network exactly."}},{"@type":"Question","name":"Do I need my seed phrase to swap Monero?","acceptedAnswer":{"@type":"Answer","text":"No. Use your receiving address to set up the order and authorize the XMR payment inside your own wallet. Never enter your seed phrase or private keys into a swap form or support chat."}}]}]}
-</script>
 <script>
-const moneroTicket=document.getElementById('monero-ticket');
-function openMoneroConversion(){window.location.assign('/dashboard/');}
-moneroTicket.addEventListener('click',openMoneroConversion);
-moneroTicket.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();openMoneroConversion();}});
-document.getElementById('wallet-film-play').addEventListener('click',()=>{const player=document.createElement('iframe');player.src='https://www.youtube-nocookie.com/embed/6yys3210G8g?autoplay=1&rel=0';player.title='How to Swap Crypto through Ledger';player.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';player.allowFullscreen=true;player.referrerPolicy='strict-origin-when-cross-origin';document.getElementById('wallet-film').replaceChildren(player);player.focus();});
+(() => {
+  'use strict';
+  const amount = document.getElementById('amount');
+  const received = document.getElementById('received');
+  const rateOutput = document.getElementById('rate');
+  const feeOutput = document.getElementById('network-fee');
+  const message = document.getElementById('amount-message');
+  const exchangeRate = 0.985;
+  const baseFee = 0.25;
+  const networkFactor = 0.001;
+  const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 6 });
+  let timer;
+
+  function clearQuote() {
+    received.value = '—';
+    rateOutput.value = '—';
+    feeOutput.value = '—';
+  }
+
+  function updateQuote() {
+    clearTimeout(timer);
+    const raw = amount.value.trim();
+    const value = amount.valueAsNumber;
+    const valid = raw !== '' && Number.isFinite(value) && value >= 1 && value <= 1000000 && !amount.validity.badInput;
+    amount.setAttribute('aria-invalid', String(!valid));
+    message.dataset.invalid = String(!valid);
+    if (!valid) {
+      clearQuote();
+      const error = 'Enter an amount from 1 to 1,000,000.';
+      amount.setCustomValidity(error);
+      message.textContent = error;
+      return;
+    }
+    amount.setCustomValidity('');
+    const networkFee = baseFee + value * networkFactor;
+    const netAmount = Math.max(0, value * exchangeRate - networkFee);
+    received.value = formatter.format(netAmount);
+    rateOutput.value = '1 → ' + formatter.format(exchangeRate);
+    feeOutput.value = formatter.format(networkFee) + ' destination units';
+    message.textContent = '';
+  }
+
+  amount.addEventListener('input', () => {
+    clearTimeout(timer);
+    amount.setCustomValidity('');
+    clearQuote();
+    timer = setTimeout(updateQuote, 200);
+  });
+  amount.addEventListener('change', updateQuote);
+  amount.addEventListener('blur', updateQuote);
+  updateQuote();
+})();
 </script>
 </body>
 </html>

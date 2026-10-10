@@ -1,0 +1,3 @@
+# Monero Swap
+
+Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.
