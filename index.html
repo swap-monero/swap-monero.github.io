@@ -1,1107 +1,231 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monero Swap — Private, Non-Custodial XMR to BTC Exchange</title>
-<meta name="description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
-<link rel="canonical" href="https://swap-monero.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Monero Swap">
-<meta property="og:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
-<meta property="og:url" content="https://swap-monero.github.io/">
-<meta property="og:image" content="https://swap-monero.github.io/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Monero Swap">
-<meta name="twitter:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
-<meta name="twitter:image" content="https://swap-monero.github.io/og.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monero Swap — Private, Non-Custodial XMR to BTC Exchange</title>
+  <meta name="description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+  <link rel="canonical" href="https://swap-monero.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Monero Swap">
+  <meta property="og:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+  <meta property="og:url" content="https://swap-monero.github.io/">
+  <meta property="og:image" content="https://swap-monero.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Monero Swap">
+  <meta name="twitter:description" content="Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.">
+  <meta name="twitter:image" content="https://swap-monero.github.io/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-monero.github.io/#website", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange"}, {"@type": "WebPage", "@id": "https://swap-monero.github.io/#webpage", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange", "isPartOf": {"@id": "https://swap-monero.github.io/#website"}, "description": "Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.", "datePublished": "2026-10-10", "dateModified": "2026-10-10"}, {"@type": "SoftwareApplication", "name": "Monero Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-monero.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Monero Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Monero Swap is a direct, non-custodial trade between XMR and another asset, usually BTC, locked by cryptography so both sides complete together or neither side moves at all."}}, {"@type": "Question", "name": "Does a Monero Swap need KYC or an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. The trade settles wallet-to-wallet with no sign-up and no identity verification, which is one of the main reasons people choose it over a custodial exchange."}}, {"@type": "Question", "name": "Why can't Monero use the same hash-locked contracts as Bitcoin?", "acceptedAnswer": {"@type": "Answer", "text": "Monero has no scripting language for conditional spends, so a Monero Swap instead uses adaptor signatures that tie the Monero-side key to the Bitcoin-side secret, achieving the same all-or-nothing result without on-chain scripts."}}, {"@type": "Question", "name": "How long does a Monero Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most of the wait is confirmation time on each chain — commonly around ten Monero blocks, roughly twenty minutes, plus however long the Bitcoin leg takes to confirm at the fee paid."}}, {"@type": "Question", "name": "Is a Monero Swap really trustless?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The locking scheme means revealing the secret that claims one leg automatically gives the other party the information needed to claim theirs, so neither side can take funds without the trade also completing for the counterpart."}}, {"@type": "Question", "name": "Can I check my Monero Swap transaction on an explorer?", "acceptedAnswer": {"@type": "Answer", "text": "You can verify your own transfer's confirmation status using your wallet's view key against an explorer such as xmrchain.net, though Monero's ring signatures and stealth addresses mean you cannot see other people's amounts the way you would on a transparent chain."}}, {"@type": "Question", "name": "What's the biggest risk in a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "The practical risks are an expired quote, an underpriced fee that delays confirmation, or sending to the wrong address — not a central vault being compromised, since a non-custodial swap never holds your funds in one place."}}]}]}</script>
-<style>
-:root{--bg:#FAFBFD;--surface:#FFFFFF;--text:#111725;--muted:#586072;--accent:#4F46E5;--accent-ink:#FFFFFF;--radius:12px;--display:"Sora";--body:"Inter"}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html {
-  min-width: 280px;
-  scroll-behavior: smooth;
-  scroll-padding-top: 2rem;
-  background: var(--bg);
-  -webkit-text-size-adjust: 100%;
-}
-body {
-  margin: 0;
-  color: var(--text);
-  background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42rem), var(--bg);
-  font-family: var(--body);
-  font-size: 1rem;
-  line-height: 1.65;
-  overflow-wrap: anywhere;
-  -webkit-font-smoothing: antialiased;
-}
-::selection {
-  color: var(--accent-ink);
-  background: var(--accent);
-}
-a {
-  color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.22em;
-  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-}
-a:hover {
-  color: color-mix(in srgb, var(--accent) 76%, var(--text));
-}
-a:focus-visible,
-input:focus-visible,
-summary:focus-visible,
-[tabindex]:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 5px;
-}
-img,
-svg {
-  max-width: 100%;
-  vertical-align: middle;
-}
-img {
-  height: auto;
-}
-input,
-output {
-  font-family: var(--body);
-}
-h1,
-h2,
-h3,
-h4 {
-  color: var(--text);
-  font-family: var(--display);
-  text-wrap: balance;
-}
-p,
-ul,
-ol,
-blockquote,
-figure {
-  margin: 0;
-}
-.c6f1419 {
-  width: min(100% - 4rem, 1120px);
-  margin-inline: auto;
-}
-.c0bccaa {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  min-height: 92px;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-}
-.c5c5cf4 {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.2rem;
-  font-weight: 750;
-  letter-spacing: -0.045em;
-}
-.c1dcf89 {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent) 23%, transparent);
-  border-radius: calc(var(--radius) * 0.55);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
-  font-size: 1.4rem;
-  line-height: 1;
-}
-.cd58f48 {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  min-height: 42px;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-  border-radius: calc(var(--radius) * 0.65);
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 80%, transparent);
-  font-size: 0.85rem;
-  font-weight: 650;
-  text-decoration: none;
-}
-.cd58f48:hover {
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-}
-.c1b1e34 {
-  padding-block: 1.4rem 0.5rem;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.c688e27 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.7rem;
-  margin: 0;
-  padding: 0;
-  color: var(--muted);
-  list-style: none;
-}
-.c688e27 ol,
-.c688e27 ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.c688e27 li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-.c688e27 li + li::before {
-  content: "/";
-  color: color-mix(in srgb, var(--muted) 60%, transparent);
-}
-.c688e27 a {
-  color: var(--muted);
-  text-decoration: none;
-}
-.c688e27 a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-.c688e27 [aria-current="page"] {
-  color: var(--text);
-}
-.c297ed9 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: clamp(1.5rem, 3.5vw, 2.75rem);
-  text-align: center;
-}
-.c145e6b {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 1.25rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  border-radius: calc(var(--radius) * 2);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-.c145e6b::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
-}
-.c297ed9 h1 {
-  max-width: 960px;
-  margin: 0;
-  font-size: clamp(2.3rem, 5vw, 4.2rem);
-  font-weight: 650;
-  line-height: 1.06;
-  letter-spacing: -0.06em;
-}
-.c297ed9 h1 em,
-.c297ed9 h1 strong,
-.c297ed9 h1 span {
-  color: var(--accent);
-}
-.c297ed9 h1 em {
-  font-style: normal;
-}
-.c9aec16 {
-  max-width: 720px;
-  margin: 1.1rem auto 0;
-  color: var(--muted);
-  font-size: clamp(1rem, 1.65vw, 1.15rem);
-  line-height: 1.85;
-  text-wrap: pretty;
-}
-.cc624f7 {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  margin-top: clamp(1.25rem, 2.5vw, 2rem);
-  padding: clamp(1.2rem, 3.5vw, 2.6rem);
-  border: 1px solid color-mix(in srgb, var(--accent) 19%, var(--surface));
-  border-radius: var(--radius);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 5%, var(--surface)), var(--surface) 48%);
-  box-shadow: 0 24px 65px -24px color-mix(in srgb, var(--text) 21%, transparent), 0 4px 14px -7px color-mix(in srgb, var(--accent) 16%, transparent);
-  text-align: left;
-}
-.cc624f7::before {
-  position: absolute;
-  inset: -1px 12% auto;
-  height: 2px;
-  content: "";
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 0%, transparent), color-mix(in srgb, var(--accent) 65%, transparent), color-mix(in srgb, var(--accent) 0%, transparent));
-}
-.c5bbb0b {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem 1rem;
-  margin-bottom: 1rem;
-}
-.c5bbb0b h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 650;
-  letter-spacing: -0.035em;
-}
-.c5bbb0b p {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.cc8de4c {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: stretch;
-  gap: 1rem;
-}
-.c1f2478 {
-  min-width: 0;
-  padding: 1.4rem 1.5rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  border-radius: calc(var(--radius) * 0.7);
-  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
-  transition: border-color 160ms ease, box-shadow 160ms ease;
-}
-.c1f2478:focus-within {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 9%, transparent);
-}
-.c9d6c6e {
-  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), color-mix(in srgb, var(--accent) 3%, var(--surface)));
-}
-.ce32b5d {
-  display: block;
-  margin-bottom: 0.65rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 550;
-}
-#amount {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  color: var(--text);
-  background: color-mix(in srgb, var(--surface) 0%, transparent);
-  font-family: var(--body);
-  font-size: clamp(1.7rem, 3vw, 2.65rem);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.3;
-  letter-spacing: -0.045em;
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-#amount::-webkit-inner-spin-button,
-#amount::-webkit-outer-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-}
-#amount::placeholder {
-  color: var(--muted);
-  opacity: 0.65;
-}
-#amount:focus-visible {
-  outline-offset: 3px;
-  outline-width: 2px;
-}
-#amount[aria-invalid="true"] {
-  text-decoration: underline wavy;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-#received {
-  display: block;
-  min-height: 1.3em;
-  color: var(--text);
-  font-size: clamp(1.7rem, 3vw, 2.65rem);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.3;
-  letter-spacing: -0.045em;
-  overflow-wrap: anywhere;
-}
-.c0df4af {
-  display: block;
-  margin-top: 0.6rem;
-  color: var(--muted);
-  font-size: 0.73rem;
-  line-height: 1.5;
-}
-.c052a8a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding-inline: 0.15rem;
-}
-.c0cabb6 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  width: 48px;
-  min-height: 48px;
-  padding: 0.4rem;
-  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  border-radius: calc(var(--radius) * 0.55);
-  background: var(--surface);
-  box-shadow: 0 4px 10px color-mix(in srgb, var(--text) 4%, transparent);
-  font-size: 0.65rem;
-  line-height: 1.2;
-  text-align: center;
-}
-.c0cabb6 img,
-.c0cabb6 svg {
-  display: block;
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-.c621eaf {
-  color: var(--accent);
-  font-size: 1.3rem;
-}
-.cbbea63 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
-  align-items: center;
-  gap: 1.5rem 2.5rem;
-  margin-top: 1.4rem;
-}
-.c273a9a {
-  display: grid;
-  gap: 0.45rem;
-  margin: 0;
-  font-size: 0.8rem;
-}
-.c273a9a > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.c273a9a dt {
-  color: var(--muted);
-}
-.c273a9a dd {
-  margin: 0;
-  color: var(--text);
-  font-weight: 550;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-.cc9c024 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  min-height: 56px;
-  padding: 0.9rem 1.3rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 85%, var(--text));
-  border-radius: calc(var(--radius) * 0.65);
-  color: var(--accent-ink);
-  background: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 85%, var(--text)));
-  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--accent) 45%, transparent);
-  font-size: 0.9rem;
-  font-weight: 650;
-  text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-.cc9c024:hover {
-  transform: translateY(-2px);
-  color: var(--accent-ink);
-  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 94%, var(--text)), color-mix(in srgb, var(--accent) 78%, var(--text)));
-  box-shadow: 0 12px 28px -9px color-mix(in srgb, var(--accent) 50%, transparent);
-}
-.cc9c024:active {
-  transform: translateY(0);
-}
-.cc9c024 span:last-child {
-  font-size: 1.3rem;
-  line-height: 1;
-}
-.c4e464e {
-  min-height: 1.5em;
-  margin-top: 0.8rem;
-  color: var(--muted);
-  font-size: 0.75rem;
-}
-.c4e464e[data-invalid="true"] {
-  color: var(--text);
-  font-weight: 600;
-}
-.c0a9222 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  margin-block: 1.6rem 4.5rem;
-  padding: 1rem 0;
-  border-block: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  list-style: none;
-}
-.c0a9222 li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.75rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  text-align: center;
-}
-.c0a9222 li + li {
-  border-left: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-}
-.c0a9222 li::before {
-  content: "✓";
-  color: var(--accent);
-  font-size: 0.85rem;
-  font-weight: 650;
-}
-.c8be37d {
-  margin-bottom: 4rem;
-  padding: clamp(1.25rem, 3.5vw, 2.75rem);
-  border: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 12px 35px -22px color-mix(in srgb, var(--text) 18%, transparent);
-}
-.c54098a {
-  margin: 0 0 1.6rem;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.045em;
-}
-.c38e1b8 {
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-}
-.c2ecc38 {
-  width: 100%;
-  border-collapse: collapse;
-  color: var(--text);
-  font-size: 0.92rem;
-  line-height: 1.65;
-  text-align: left;
-}
-.c2ecc38 caption {
-  margin-bottom: 1rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-  text-align: left;
-}
-.c2ecc38 th,
-.c2ecc38 td {
-  padding: 1.05rem 1.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  vertical-align: top;
-}
-.c2ecc38 th {
-  width: 31%;
-  color: var(--muted);
-  font-weight: 500;
-}
-.c2ecc38 td {
-  font-weight: 550;
-}
-.c2ecc38 tr:nth-child(odd) {
-  background: color-mix(in srgb, var(--accent) 3%, var(--surface));
-}
-.c2ecc38 tr:last-child > * {
-  border-bottom: 0;
-}
-.c2ecc38 thead th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  font-weight: 650;
-}
-.c87d5aa {
-  width: min(100%, 860px);
-  margin-inline: auto;
-}
-.cedb1d7 {
-  margin-block: 0 3.6rem;
-  padding-bottom: 3.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  scroll-margin-top: 2rem;
-}
-.c896ef2 {
-  margin: 0 0 1.25rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.045em;
-}
-.c4ba9b9 {
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: 1rem;
-  line-height: 1.85;
-}
-.c4ba9b9 > * + * {
-  margin-top: 1.25rem;
-}
-.c4ba9b9 h3,
-.c4ba9b9 h4 {
-  margin-block: 2rem 0.75rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-}
-.c4ba9b9 h4 {
-  font-size: 1.1rem;
-}
-.c4ba9b9 strong,
-.cbcfb16 strong {
-  color: var(--text);
-  font-weight: 650;
-}
-.c4ba9b9 ul,
-.c4ba9b9 ol,
-.cbcfb16 ul,
-.cbcfb16 ol {
-  padding-left: 1.4rem;
-}
-.c4ba9b9 li,
-.cbcfb16 li {
-  padding-left: 0.3rem;
-}
-.c4ba9b9 li + li,
-.cbcfb16 li + li {
-  margin-top: 0.65rem;
-}
-.c4ba9b9 li::marker,
-.cbcfb16 li::marker {
-  color: var(--accent);
-}
-.c4ba9b9 li > ul,
-.c4ba9b9 li > ol {
-  margin-top: 0.65rem;
-}
-.c4ba9b9 blockquote {
-  padding: 1.25rem 1.5rem;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 calc(var(--radius) * 0.45) calc(var(--radius) * 0.45) 0;
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-}
-.c4ba9b9 blockquote p + p {
-  margin-top: 0.8rem;
-}
-.c4ba9b9 table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
-  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-  border-radius: calc(var(--radius) * 0.6);
-  background: var(--surface);
-  font-size: 0.88rem;
-  line-height: 1.6;
-  text-align: left;
-  overscroll-behavior-inline: contain;
-}
-.c4ba9b9 table th,
-.c4ba9b9 table td {
-  min-width: 8rem;
-  padding: 0.95rem 1.15rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  vertical-align: top;
-}
-.c4ba9b9 table th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  font-weight: 600;
-}
-.c4ba9b9 table tbody tr:nth-child(even) {
-  background: color-mix(in srgb, var(--bg) 65%, var(--surface));
-}
-.c4ba9b9 table tr:last-child td {
-  border-bottom: 0;
-}
-.c4ba9b9 table caption {
-  padding: 0.85rem 1.15rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-  text-align: left;
-}
-.c4ba9b9 code,
-.c4ba9b9 pre {
-  border-radius: calc(var(--radius) * 0.3);
-  color: var(--text);
-  background: color-mix(in srgb, var(--text) 5%, var(--surface));
-  font-family: var(--body);
-  font-size: 0.9em;
-}
-.c4ba9b9 code {
-  padding: 0.15em 0.4em;
-}
-.c4ba9b9 pre {
-  overflow-x: auto;
-  padding: 1.2rem;
-}
-.c4ba9b9 pre code {
-  padding: 0;
-  background: color-mix(in srgb, var(--surface) 0%, transparent);
-}
-.c4ba9b9 figure img {
-  display: block;
-  border-radius: calc(var(--radius) * 0.7);
-}
-.c4ba9b9 figcaption {
-  margin-top: 0.7rem;
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-.cdfda14 {
-  margin-block: 1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  border-radius: calc(var(--radius) * 0.7);
-  background: var(--surface);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
-.cdfda14:hover {
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-}
-.cdfda14[open] {
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-  box-shadow: 0 8px 25px -14px color-mix(in srgb, var(--text) 15%, transparent);
-}
-.ccf73eb {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.3rem 1.5rem;
-  border-radius: calc(var(--radius) * 0.7);
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.04rem;
-  font-weight: 550;
-  line-height: 1.5;
-  list-style: none;
-  cursor: pointer;
-}
-.ccf73eb::-webkit-details-marker {
-  display: none;
-}
-.ccf73eb::after {
-  display: grid;
-  flex: 0 0 27px;
-  width: 27px;
-  height: 27px;
-  place-items: center;
-  content: "+";
-  border-radius: 50%;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
-  font-family: var(--body);
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1;
-}
-.cdfda14[open] > .ccf73eb::after {
-  content: "−";
-}
-.cbcfb16 {
-  padding: 0 1.5rem 1.5rem;
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: 0.95rem;
-  line-height: 1.85;
-}
-.cbcfb16 > * + * {
-  margin-top: 1rem;
-}
-.c5fe5fa {
-  margin-top: 4rem;
-  padding: 2.2rem 0 2.5rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-}
-.c5fe5fa .c54098a {
-  margin-bottom: 1.2rem;
-  font-size: 1.35rem;
-}
-.c1719d3 {
-  display: grid;
-  gap: 0.7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.cc6d88e {
-  min-width: 0;
-  padding: 0.8rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-  border-radius: calc(var(--radius) * 0.45);
-  color: var(--muted);
-  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
-  font-size: 0.82rem;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-.cc6d88e a,
-a.cc6d88e {
-  color: var(--text);
-  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
-}
-.cc6d88e a:hover,
-a.cc6d88e:hover {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
-}
-.c9c5cb0 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem 2rem;
-  margin-top: 1rem;
-  padding-block: 1.7rem 2.2rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-.c58c578 {
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-.c0b22ee span {
-  color: var(--text);
-}
-@media (min-width: 1280px) {
-  .c297ed9 {
-    padding-top: 5.2rem;
-  }
-  .cc624f7 {
-    margin-top: 3.4rem;
-  }
-  .c1f2478 {
-    padding-block: 1.6rem 1.3rem;
-  }
-}
-@media (max-width: 900px) {
-  .c6f1419 {
-    width: min(100% - 3rem, 1120px);
-  }
-  .cc8de4c {
-    gap: 0.65rem;
-  }
-  .c1f2478 {
-    padding: 1.1rem;
-  }
-  .c052a8a {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-  .c0cabb6 {
-    width: 38px;
-    min-height: 38px;
-  }
-  .c0cabb6 img,
-  .c0cabb6 svg {
-    width: 25px;
-    height: 25px;
-  }
-  .c621eaf {
-    line-height: 1;
-  }
-  .c0a9222 {
-    margin-bottom: 3rem;
-  }
-}
-@media (max-width: 640px) {
-  html {
-    scroll-padding-top: 1rem;
-  }
-  .c6f1419 {
-    width: calc(100% - 2rem);
-  }
-  .c0bccaa {
-    min-height: 76px;
-    gap: 0.75rem;
-  }
-  .c5c5cf4 {
-    gap: 0.5rem;
-    font-size: 1.08rem;
-  }
-  .cd58f48 {
-    min-height: 40px;
-    padding: 0.45rem 0.8rem;
-    font-size: 0.78rem;
-  }
-  .c1b1e34 {
-    padding-top: 1rem;
-  }
-  .c297ed9 {
-    padding-top: 2.4rem;
-  }
-  .c297ed9 h1 {
-    font-size: clamp(2.25rem, 10vw, 3.6rem);
-    letter-spacing: -0.05em;
-  }
-  .c9aec16 {
-    margin-top: 1.1rem;
-    line-height: 1.75;
-  }
-  .cc624f7 {
-    padding: 1.1rem;
-  }
-  .c5bbb0b {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1.1rem;
-  }
-  .cc8de4c {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.7rem;
-  }
-  .c1f2478 {
-    padding: 1.2rem;
-  }
-  #amount,
-  #received {
-    font-size: clamp(1.8rem, 8vw, 2.6rem);
-  }
-  .c052a8a {
-    flex-direction: row;
-    gap: 0.8rem;
-    padding-block: 0.1rem;
-  }
-  .c0cabb6 {
-    width: 40px;
-    min-height: 40px;
-  }
-  .cbbea63 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.2rem;
-    margin-top: 1.2rem;
-  }
-  .c273a9a {
-    font-size: 0.78rem;
-  }
-  .cc9c024 {
-    min-height: 54px;
-  }
-  .c0a9222 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    margin-block: 1.4rem 2.6rem;
-    padding-block: 0.5rem;
-  }
-  .c0a9222 li {
-    justify-content: flex-start;
-    padding: 0.7rem 1rem;
-  }
-  .c0a9222 li + li {
-    border-top: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
-    border-left: 0;
-  }
-  .c8be37d {
-    margin-bottom: 2.8rem;
-    padding: 1.2rem;
-  }
-  .c54098a {
-    margin-bottom: 1.2rem;
-  }
-  .c2ecc38 {
-    font-size: 0.82rem;
-  }
-  .c2ecc38 th,
-  .c2ecc38 td {
-    padding: 0.8rem 0.6rem;
-  }
-  .c2ecc38 th {
-    width: 38%;
-  }
-  .cedb1d7 {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.3rem;
-  }
-  .c4ba9b9 {
-    font-size: 0.95rem;
-    line-height: 1.8;
-  }
-  .c4ba9b9 h3 {
-    font-size: 1.2rem;
-  }
-  .c4ba9b9 blockquote {
-    padding: 1rem 1.15rem;
-  }
-  .ccf73eb {
-    gap: 0.9rem;
-    padding: 1.1rem;
-    font-size: 0.98rem;
-  }
-  .cbcfb16 {
-    padding: 0 1.1rem 1.2rem;
-    font-size: 0.9rem;
-  }
-  .c5fe5fa {
-    margin-top: 2.6rem;
-    padding-block: 1.8rem;
-  }
-  .c9c5cb0 {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-    padding-block: 1.4rem 1.8rem;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    transition: none;
-    animation: none;
-  }
-  .cc9c024:hover {
-    transform: none;
-  }
-}
-@media print {
-  body {
-    background: var(--bg);
-  }
-  .c6f1419,
-  .c87d5aa {
-    width: 100%;
-  }
-  .cd58f48,
-  .cc9c024 {
-    display: none;
-  }
-  .c297ed9 {
-    padding-top: 1.5rem;
-  }
-  .c297ed9 h1 {
-    font-size: 2.6rem;
-  }
-  .cc624f7,
-  .c8be37d,
-  .cdfda14 {
-    box-shadow: none;
-    break-inside: avoid;
-  }
-  .c4ba9b9 h3,
-  .c896ef2 {
-    break-after: avoid;
-  }
-  .c4ba9b9 table {
-    display: table;
-    overflow: visible;
-  }
-}
-</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-monero.github.io/#website", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange"}, {"@type": "WebPage", "@id": "https://swap-monero.github.io/#webpage", "url": "https://swap-monero.github.io/", "name": "Monero Swap — Private, Non-Custodial XMR to BTC Exchange", "isPartOf": {"@id": "https://swap-monero.github.io/#website"}, "description": "Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.", "datePublished": "2026-10-11", "dateModified": "2026-10-11"}, {"@type": "SoftwareApplication", "name": "Monero Swap", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-monero.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Monero Swap"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "A Monero Swap is a direct, non-custodial trade between XMR and another asset, usually BTC, locked by cryptography so both sides complete together or neither side moves at all."}}, {"@type": "Question", "name": "Does a Monero Swap need KYC or an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. The trade settles wallet-to-wallet with no sign-up and no identity verification, which is one of the main reasons people choose it over a custodial exchange."}}, {"@type": "Question", "name": "Why can't Monero use the same hash-locked contracts as Bitcoin?", "acceptedAnswer": {"@type": "Answer", "text": "Monero has no scripting language for conditional spends, so a Monero Swap instead uses adaptor signatures that tie the Monero-side key to the Bitcoin-side secret, achieving the same all-or-nothing result without on-chain scripts."}}, {"@type": "Question", "name": "How long does a Monero Swap take?", "acceptedAnswer": {"@type": "Answer", "text": "Most of the wait is confirmation time on each chain — commonly around ten Monero blocks, roughly twenty minutes, plus however long the Bitcoin leg takes to confirm at the fee paid."}}, {"@type": "Question", "name": "Is a Monero Swap really trustless?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The locking scheme means revealing the secret that claims one leg automatically gives the other party the information needed to claim theirs, so neither side can take funds without the trade also completing for the counterpart."}}, {"@type": "Question", "name": "Can I check my Monero Swap transaction on an explorer?", "acceptedAnswer": {"@type": "Answer", "text": "You can verify your own transfer's confirmation status using your wallet's view key against an explorer such as xmrchain.net, though Monero's ring signatures and stealth addresses mean you cannot see other people's amounts the way you would on a transparent chain."}}, {"@type": "Question", "name": "What's the biggest risk in a Monero Swap?", "acceptedAnswer": {"@type": "Answer", "text": "The practical risks are an expired quote, an underpriced fee that delays confirmation, or sending to the wrong address — not a central vault being compromised, since a non-custodial swap never holds your funds in one place."}}]}]}</script>
+  <style>
+    :root{--bg:#FAFBFD;--surface:#FFFFFF;--text:#111725;--muted:#586072;--accent:#4F46E5;--accent-ink:#FFFFFF;--radius:12px;--display:"Sora";--body:"Inter"}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.7 var(--body); -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: .12em; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--display); line-height: 1.15; text-wrap: balance; }
+    p, h1, h2, h3 { margin-top: 0; }
+    img, svg { max-width: 100%; vertical-align: middle; }
+    .c6f1419 { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
+    .c7cae5a { position: absolute; z-index: 5; top: .5rem; left: 1rem; padding: .7rem 1rem; background: var(--surface); transform: translateY(-180%); border-radius: var(--radius); }
+    .c7cae5a:focus { transform: translateY(0); }
+    .cae3270 { border-bottom: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .c39eaa8 { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .c776308 { display: inline-flex; align-items: center; gap: .7rem; color: var(--text); font: 650 1.12rem/1.2 var(--display); text-decoration: none; }
+    .cdf47fb { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: calc(var(--radius) * .6); background: var(--accent); color: var(--accent-ink); }
+    .c5079c4 { width: 1.2rem; height: 1.2rem; fill: none; stroke: var(--accent-ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+    .c3c454b { display: flex; align-items: center; gap: 1.8rem; }
+    .c3c454b > a { font-size: .88rem; font-weight: 600; text-decoration: none; }
+    .c3c454b > a:not(.c035ce5) { color: var(--muted); }
+    .c035ce5 { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 52px; padding: .85rem 1.4rem; border: 1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent); border-radius: var(--radius); background: linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 88%,var(--text))); color: var(--accent-ink); font: 650 .95rem/1.3 var(--body); text-decoration: none; box-shadow: 0 6px 18px color-mix(in srgb,var(--accent) 17%,transparent); transition: transform .18s ease, box-shadow .18s ease; }
+    .c035ce5:hover { transform: translateY(-2px); box-shadow: 0 9px 24px color-mix(in srgb,var(--accent) 25%,transparent); }
+    .c39eaa8 .c035ce5 { min-height: 42px; padding: .65rem 1rem; }
+    .cf3fb61 { padding-block: 1rem 0; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+    .c688e27 { color: var(--muted); }
+    .c688e27 a, a.c688e27 { color: var(--muted); text-decoration: none; }
+    .c688e27 a:hover, a.c688e27:hover { color: var(--accent); text-decoration: underline; }
+    .c688e27 ol, .c688e27 ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; padding: 0; margin: 0; list-style: none; }
+    .c297ed9 { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: clamp(2rem,5vw,4.5rem); align-items: start; padding-block: 1.5rem 3rem; }
+    .c145e6b { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.3rem; color: var(--accent); font-size: .86rem; font-weight: 600; }
+    .c145e6b::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb,var(--accent) 9%,transparent); }
+    h1 { margin-bottom: 1.4rem; font-size: clamp(2.5rem,4.7vw,4.35rem); font-weight: 600; letter-spacing: -.055em; overflow-wrap: anywhere; }
+    h1 em { color: var(--accent); font-style: normal; }
+    .c11a8a6 { max-width: 48ch; margin-bottom: 2rem; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
+    .ccac3a5 { position: relative; min-width: 0; padding: clamp(1.1rem,2.4vw,1.5rem); border: 1px solid color-mix(in srgb,var(--accent) 20%,var(--surface)); border-radius: calc(var(--radius) * 1.6); background: linear-gradient(155deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 40%); box-shadow: 0 24px 64px color-mix(in srgb,var(--text) 9%,transparent),0 4px 12px color-mix(in srgb,var(--accent) 6%,transparent); }
+    .c1b7fe3 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: 1rem; }
+    .c1b7fe3 h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.035em; }
+    .cec6c4c { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); border-radius: 999px; background: color-mix(in srgb,var(--accent) 8%,var(--surface)); color: var(--accent); font-size: .72rem; font-weight: 600; }
+    .cec6c4c::before { content: ""; width: .35rem; height: .35rem; border-radius: 50%; background: var(--accent); }
+    .route { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: .8rem; padding: .8rem; margin-bottom: 1rem; border: 1px solid color-mix(in srgb,var(--text) 9%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .endpoint { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+    .endpoint:last-child { align-items: flex-end; }
+    .endpoint-label, .ce32b5d { color: var(--muted); font-size: .78rem; font-weight: 500; }
+    .logo { display: flex; align-items: center; min-height: 36px; max-width: 100%; overflow-wrap: anywhere; font: 600 1rem/1.3 var(--display); }
+    .logo img, .logo svg { max-height: 36px; width: auto; max-width: 100%; object-fit: contain; }
+    .route-arrow { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb,var(--accent) 9%,var(--surface)); }
+    .route-arrow .c5079c4 { stroke: var(--accent); }
+    .ce32b5d { display: block; margin-bottom: .5rem; color: var(--text); }
+    .amount-field { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 18%,transparent); border-radius: var(--radius); background: var(--bg); transition: border-color .18s ease; }
+    .amount-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); }
+    .amount-field input { width: 100%; min-width: 0; padding: .2rem 0; border: 0; background: var(--bg); color: var(--text); font: 550 1.6rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
+    .amount-field input:focus { outline: 0; }
+    .unit { color: var(--muted); font-size: .8rem; }
+    .cc7f4b4 { margin: .45rem 0 .85rem; color: var(--muted); font-size: .74rem; }
+    .field-error { margin: .5rem 0; color: var(--text); font-size: .8rem; font-weight: 600; }
+    [hidden] { display: none !important; }
+    .estimate { padding: 1rem; border-radius: var(--radius); background: linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--accent) 4%,var(--surface))); }
+    .estimate-label { margin-bottom: .25rem; color: var(--muted); font-size: .8rem; }
+    .estimate-value { display: block; color: var(--text); font: 600 clamp(1.7rem,3vw,2.5rem)/1.3 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .estimate-value small { color: var(--muted); font: 400 .8rem/1.4 var(--body); letter-spacing: 0; }
+    .estimate dl { display: grid; gap: .5rem; margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .8rem; }
+    .estimate dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; }
+    .estimate dt { color: var(--muted); }
+    .estimate dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .method { margin-block: .7rem; color: var(--muted); font-size: .75rem; }
+    .method summary { width: fit-content; color: var(--text); cursor: pointer; }
+    .method p { margin: .65rem 0 0; }
+    .ccac3a5 > .c035ce5 { width: 100%; }
+    .c263729 { padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .cee992e { margin-bottom: .45rem; }
+    .c305953 { display: flex; align-items: center; gap: .75rem; }
+    .c492ba2 { flex: 1; min-width: 0; padding: 0; border: 0; background: transparent; color: var(--text); font: 550 1.55rem/1.2 var(--display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .c492ba2:focus { outline: 0; }
+    .cc0df78 { position: relative; display: inline-flex; align-items: center; gap: .5rem; flex: none; padding: .4rem 1.5rem .4rem .5rem; border: 1px solid color-mix(in srgb,var(--text) 13%,transparent); border-radius: 999px; background: var(--bg); }
+    .c21df4b { width: 22px; height: 22px; border-radius: 50%; object-fit: contain; flex: none; }
+    .c80556d { border: 0; background: transparent; color: var(--text); font: 600 .95rem/1 var(--body); cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .c80556d:focus { outline: 0; }
+    .cc0df78::after { content: ""; position: absolute; right: .7rem; width: .42rem; height: .42rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-2px) rotate(45deg); pointer-events: none; }
+    .c9c63ff { margin-top: .4rem; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+    .ca6aa7f { position: relative; z-index: 1; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin: -.55rem auto; padding: 0; border: 3px solid var(--surface); border-radius: 50%; background: color-mix(in srgb,var(--accent) 13%,var(--surface)); color: var(--accent); cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .ca6aa7f svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ca6aa7f:hover { transform: rotate(180deg); background: color-mix(in srgb,var(--accent) 20%,var(--surface)); }
+    .c07df16 { display: grid; gap: .5rem; margin: 1rem 0 0; padding-top: .9rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .82rem; }
+    .c07df16 div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem 1rem; }
+    .c07df16 dt { color: var(--muted); }
+    .c07df16 dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .c7299e0 > .c035ce5 { width: 100%; margin-top: 1.05rem; }
+    .cb5fbf8 { padding: 2rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: calc(var(--radius) * 1.3); background: var(--surface); }
+    .c54098a { margin-bottom: 1.3rem; font-size: 1.65rem; font-weight: 550; letter-spacing: -.035em; }
+    .c38e1b8 { max-width: 100%; overflow-x: auto; }
+    .c2ecc38 { width: 100%; border-collapse: collapse; text-align: left; font-size: .92rem; }
+    .c2ecc38 caption { padding-bottom: 1rem; text-align: left; color: var(--muted); }
+    .c2ecc38 th, .c2ecc38 td { padding: 1rem 1.1rem; border-bottom: 1px solid color-mix(in srgb,var(--text) 9%,transparent); vertical-align: top; overflow-wrap: anywhere; }
+    .c2ecc38 th { color: var(--muted); font-weight: 500; }
+    .c2ecc38 thead { background: color-mix(in srgb,var(--accent) 5%,var(--surface)); }
+    .c2ecc38 tbody tr:last-child > * { border-bottom: 0; }
+    .cac78b6 { max-width: 820px; padding-block: 4rem 2rem; }
+    .cedb1d7 { margin-bottom: 3.3rem; }
+    .c896ef2 { margin: 0 0 1.1rem; font: 550 clamp(1.6rem,3vw,2.2rem)/1.2 var(--display); letter-spacing: -.035em; }
+    .c4ba9b9 { color: var(--muted); line-height: 1.85; overflow-wrap: anywhere; }
+    .c4ba9b9 p { margin-bottom: 1.2rem; }
+    .c4ba9b9 strong, .c4ba9b9 h3, .c4ba9b9 h4 { color: var(--text); }
+    .c4ba9b9 ul, .c4ba9b9 ol { padding-left: 1.3rem; }
+    .c4ba9b9 li { padding-left: .3rem; margin-block: .55rem; }
+    .c4ba9b9 li::marker { color: var(--accent); }
+    .c4ba9b9 blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--surface); color: var(--text); }
+    .c4ba9b9 img { height: auto; border-radius: var(--radius); }
+    .c4ba9b9 pre { overflow-x: auto; padding: 1rem; border-radius: var(--radius); background: var(--surface); }
+    .c4ba9b9 code, .c4ba9b9 pre { font-family: var(--body); }
+    .cdfda14 { margin-block: .8rem; border: 1px solid color-mix(in srgb,var(--text) 11%,transparent); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .ccf73eb { position: relative; padding: 1.3rem 3.5rem 1.3rem 1.4rem; list-style: none; cursor: pointer; color: var(--text); font: 550 1.04rem/1.5 var(--display); }
+    .ccf73eb::-webkit-details-marker { display: none; }
+    .ccf73eb::after { content: "+"; position: absolute; right: 1.4rem; top: 1.2rem; color: var(--accent); font-size: 1.3rem; }
+    details[open] > .ccf73eb::after { content: "−"; }
+    .cdfda14[open] { border-color: color-mix(in srgb,var(--accent) 35%,var(--surface)); }
+    .ccf73eb:focus-visible { outline-offset: -5px; }
+    .cbcfb16 { padding: 0 1.4rem 1.4rem; color: var(--muted); overflow-wrap: anywhere; }
+    .cbcfb16 > :last-child { margin-bottom: 0; }
+    .ca87e6b { max-width: 820px; padding-block: 1.5rem 3.5rem; border-top: 1px solid color-mix(in srgb,var(--text) 12%,transparent); }
+    .ca87e6b .c54098a { font-size: 1.25rem; }
+    .c1719d3 { margin: 0; padding-left: 1.25rem; color: var(--muted); font-size: .88rem; }
+    .cc6d88e { padding-block: .4rem; padding-left: .25rem; overflow-wrap: anywhere; }
+    .cc6d88e a, a.cc6d88e { color: var(--text); text-decoration-color: color-mix(in srgb,var(--accent) 45%,transparent); }
+    .cc6d88e a:hover, a.cc6d88e:hover { color: var(--accent); }
+    .cfa3517 { border-top: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .cf0dd82 { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; min-height: 96px; padding-block: 1.5rem; color: var(--muted); font-size: .8rem; }
+    .cf0dd82 p { margin: 0; }
+    .cf0dd82 a { color: var(--muted); }
+    @media (max-width: 850px) { .c297ed9 { grid-template-columns: minmax(0,1fr); gap: 2.5rem; padding-block: 2.5rem 3.5rem; } .caa88fd { max-width: 650px; } .ccac3a5 { width: 100%; max-width: 600px; justify-self: center; } h1 { font-size: clamp(2.5rem,7vw,4rem); } .c11a8a6 { max-width: 60ch; } }
+    @media (max-width: 540px) { .c6f1419 { width: calc(100% - 2rem); } .c39eaa8 { min-height: 76px; gap: .7rem; } .c776308 { font-size: .95rem; gap: .45rem; } .cdf47fb { width: 2rem; height: 2rem; } .c3c454b { gap: .6rem; } .c3c454b > a:not(.c035ce5) { display: none; } .c39eaa8 .c035ce5 { padding-inline: .85rem; font-size: .8rem; } .cb5fbf8 { padding: 1.25rem; } .c2ecc38 th, .c2ecc38 td { padding: .8rem .55rem; } .caa88fd > .c035ce5 { width: 100%; } .cac78b6 { padding-top: 2.8rem; } .cf0dd82 { align-items: flex-start; flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .c035ce5, .amount-field { transition: none; } .c035ce5:hover { transform: none; } }
+  </style>
 </head>
 <body>
-<div class="c6f1419">
-  <header class="c0bccaa">
-    <div class="c5c5cf4"><span class="c1dcf89" aria-hidden="true">⇄</span><span>Exchange</span></div>
-    <a class="cd58f48" href="dashboard/">Swap <span aria-hidden="true">↗</span></a>
+  <a class="c7cae5a" href="#content">Skip to content</a>
+  <header class="cae3270">
+    <nav class="c39eaa8 c6f1419" aria-label="Primary navigation">
+      <a class="c776308" href="#top" aria-label="Swap station, top of page">
+        <span class="cdf47fb" aria-hidden="true"><svg class="c5079c4" viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>
+        Swap station
+      </a>
+      <div class="c3c454b">
+        <a href="#facts">Key facts</a>
+        <a href="#sources">Sources</a>
+        <a class="c035ce5" href="dashboard/">Swap</a>
+      </div>
+    </nav>
   </header>
-  <div class="c1b1e34"><nav class="c688e27" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Monero Swap</span></nav></div>
-  <section class="c297ed9" aria-labelledby="hero-title">
-    <div class="c145e6b">A direct route to your next asset</div>
-    <h1 id="hero-title">Monero <em>Swap</em>.</h1>
-    <p class="c9aec16">A Monero Swap trades XMR for another asset, most often BTC, directly between two wallets with no exchange ever holding either coin. The trade is locked by cryptography rather than by trust: both sides either complete together or neither side moves, and you never send your funds anywhere before the other leg is guaranteed. Because Monero hides its own ledger by default, that process also has to work around this privacy rather than through a block explorer, which is what makes the mechanics worth understanding before you use one.</p>
-    <div class="cc624f7" role="group" aria-labelledby="exchange-title">
-      <div class="c5bbb0b">
-        <h2 id="exchange-title">Your exchange</h2>
-        <p>One route. Every detail in view.</p>
+  <div class="c6f1419" id="top">
+    <div class="cf3fb61"><nav class="c688e27" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Monero Swap</span></nav></div>
+    <section class="c297ed9" aria-labelledby="hero-title">
+      <div class="caa88fd">
+        <p class="c145e6b">All swap routes</p>
+        <h1 id="hero-title">Monero <em>Swap</em>.</h1>
+        <p class="c11a8a6">A Monero Swap trades XMR for another asset, most often BTC, directly between two wallets with no exchange ever holding either coin.</p>
+        <a class="c035ce5" href="dashboard/">Swap <svg class="c5079c4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
       </div>
-      <div class="cc8de4c">
-        <div class="c1f2478">
-          <label class="ce32b5d" for="amount">You pay</label>
-          <input id="amount" name="amount" type="number" inputmode="decimal" min="1" max="1000000" step="any" value="1000" required aria-describedby="amount-help amount-message" aria-invalid="false">
-          <span class="c0df4af" id="amount-help">From 1 to 1,000,000 units</span>
+      <aside class="ccac3a5 c7299e0" data-from="XMR" aria-labelledby="widget-title">
+        <div class="c1b7fe3">
+          <h2 id="widget-title">Swap</h2>
+          <span class="cec6c4c">Best route</span>
         </div>
-        <div class="c052a8a" role="group" aria-label="Exchange route">
-          <span class="c0cabb6"><img src="assets/tokens/xmr.svg" alt="Monero" width="28" height="28"></span>
-          <span class="c621eaf" role="img" aria-label="to">→</span>
-          <span class="c0cabb6"><img src="assets/tokens/btc.svg" alt="Bitcoin" width="28" height="28"></span>
+        <div class="c263729">
+          <div class="cee992e"><span class="ce32b5d">You pay</span></div>
+          <div class="c305953">
+            <input id="pay-amount" class="c492ba2" type="number" inputmode="decimal" min="0" max="1000000000" step="any" value="1" aria-label="Amount you pay">
+            <span class="cc0df78">
+              <img class="c21df4b" id="pay-ico" width="22" height="22" alt="" src="assets/tokens/eth.svg">
+              <select id="pay-token" class="c80556d" aria-label="Token you pay"></select>
+            </span>
+          </div>
+          <div class="c9c63ff" id="pay-usd">—</div>
         </div>
-        <div class="c1f2478 c9d6c6e">
-          <label class="ce32b5d" for="received">You receive</label>
-          <output id="received" for="amount" aria-live="polite" aria-atomic="true">—</output>
-          <span class="c0df4af">After network fee · destination units</span>
+        <button type="button" class="ca6aa7f" id="swap-switch" aria-label="Switch the two tokens">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v13m0 0-3-3m3 3 3-3M17 20V7m0 0-3 3m3-3 3 3"/></svg>
+        </button>
+        <div class="c263729">
+          <div class="cee992e"><span class="ce32b5d">You receive</span></div>
+          <div class="c305953">
+            <output id="get-amount" class="c492ba2" for="pay-amount">—</output>
+            <span class="cc0df78">
+              <img class="c21df4b" id="get-ico" width="22" height="22" alt="" src="assets/tokens/usdt.svg">
+              <select id="get-token" class="c80556d" aria-label="Token you receive"></select>
+            </span>
+          </div>
+          <div class="c9c63ff" id="get-usd">—</div>
         </div>
-      </div>
-      <div class="cbbea63">
-        <dl class="c273a9a">
-          <div><dt>Rate</dt><dd><output id="rate" for="amount">—</output></dd></div>
-          <div><dt>Network fee</dt><dd><output id="network-fee" for="amount">—</output></dd></div>
+        <dl class="c07df16">
+          <div><dt>Rate</dt><dd id="swap-rate">—</dd></div>
+          <div><dt>Network fee</dt><dd id="swap-fee">0.3%</dd></div>
         </dl>
-        <a class="cc9c024" href="dashboard/"><span>Swap</span><span aria-hidden="true">→</span></a>
-      </div>
-      <p class="c4e464e" id="amount-message" role="status" aria-live="polite"></p>
-    </div>
-  </section>
-  <ul class="c0a9222" aria-label="Exchange features">
-    <li>Non-custodial</li>
-    <li>On-chain</li>
-    <li>No sign-up</li>
-    <li>Transparent fees</li>
-  </ul>
-  <section class="c8be37d" aria-labelledby="facts-title">
-    <h2 class="c54098a" id="facts-title">Key facts</h2>
-    <div class="c38e1b8" tabindex="0" role="region" aria-label="Key facts table"><table class="c2ecc38"><tbody><tr><th scope="row">Assets</th><td>XMR and BTC, traded directly</td></tr>
+        <noscript><p class="cc7f4b4">Enable JavaScript to estimate the swap.</p></noscript>
+        <a class="c035ce5" href="dashboard/">Swap <svg class="c5079c4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </aside>
+    </section>
+    <section class="cb5fbf8" id="facts" aria-labelledby="facts-title">
+      <h2 class="c54098a" id="facts-title">Key facts</h2>
+      <div class="c38e1b8"><table class="c2ecc38"><tbody><tr><th scope="row">Assets</th><td>XMR and BTC, traded directly</td></tr>
 <tr><th scope="row">Custody</th><td>Non-custodial — neither side holds funds in escrow</td></tr>
 <tr><th scope="row">Mechanism</th><td>Atomic swap via adaptor signatures</td></tr>
 <tr><th scope="row">Account</th><td>None — no sign-up, no KYC</td></tr>
 <tr><th scope="row">Monero confirmations</th><td>10 blocks (~20 minutes) typical</td></tr>
 <tr><th scope="row">Privacy tools</th><td>Ring signatures and stealth addresses</td></tr></tbody></table></div>
-  </section>
-  <main class="c87d5aa" id="content">
+    </section>
+  </div>
+  <main class="cac78b6 c6f1419" id="content">
     <section class="cedb1d7"><h2 class="c896ef2">What a Monero Swap Is</h2><div class="c4ba9b9"><strong>A Monero Swap is a peer-to-peer trade that exchanges XMR for BTC, or the reverse, using a locking scheme that only ever releases both sides together or neither side at all.</strong> There is no shared custodian holding a pool of coins and no order book matching strangers' balances inside one company's database. Instead, two parties generate a trade that is cryptographically tied to a single secret: once that secret is revealed to claim one leg, it can be extracted and used to claim the other, so the swap either finishes in full or reverts to nothing lost. The process is documented in detail in the <a href="https://getmonero.org/" rel="nofollow noopener" target="_blank">Monero docs</a>, which is also the canonical reference for the wallet software most swap tools build on.</div></section>
 <section class="cedb1d7"><h2 class="c896ef2">Why Monero's Privacy Shapes a Monero Swap</h2><div class="c4ba9b9">Monero's ledger does not show sender, receiver or amount the way Bitcoin's does, and that design choice is exactly why this kind of trade cannot be built the same way a Bitcoin-to-Ethereum swap is. Every protocol has to prove a payment happened without being able to simply look it up on a public, labeled address.<h3>Ring Signatures and Stealth Addresses</h3>Each Monero transaction is signed with a <em>ring signature</em> that mixes the real spender's key among several decoys, so an outside observer has no way to know which of the group actually authorized the spend. The receiving address is a one-time <em>stealth address</em> generated fresh for that payment, meaning no two transfers to the same wallet look connected on-chain. Background on the design is summarized on <a href="https://en.wikipedia.org/wiki/Monero" rel="nofollow noopener" target="_blank">Wikipedia's Monero entry</a> for anyone comparing it against a transparent chain.<h3>Confirmation Depth Before You Trust a Transfer</h3>Because you cannot casually trace a Monero payment the way you would trace a Bitcoin one, swap software leans harder on confirmation count rather than on visual inspection. A transfer is typically treated as final after ten Monero blocks, roughly twenty minutes, and a cautious counterpart will wait for that depth before releasing their side. You can still verify your own transaction's status with your wallet's private view key against an explorer such as <a href="https://xmrchain.net/" rel="nofollow noopener" target="_blank">xmrchain.net</a>, which reads public block data without exposing anyone else's amounts.</div></section>
 <section class="cedb1d7"><h2 class="c896ef2">Atomic Swap Mechanics Behind a Monero Swap</h2><div class="c4ba9b9">The core trick that makes a trustless trade possible is called an atomic swap, and the Monero-Bitcoin pairing uses a variant built from adaptor signatures rather than the hash-locked contracts common elsewhere.<h3>Hash-Locked Contracts Without a Smart Contract Chain</h3>A typical atomic swap uses a hashed time-locked contract on each chain: both sides lock funds behind the same secret hash, and revealing the secret to claim one lock automatically makes it public enough to claim the other. Bitcoin supports this natively through its scripting language, which is why the Bitcoin leg of this trade is the easier half to build.<h3>Why Monero Can't Use Classic HTLCs</h3>Monero has no scripting language and no way to write a conditional lock directly into a transaction, so a straightforward HTLC is not available on its side. Protocols work around this with adaptor signatures: a cryptographic value tied to Bitcoin's secret is woven into the signature needed to spend the Monero leg, so revealing one key to take the Bitcoin automatically hands the counterpart the key needed to take the Monero. Neither party needs a shared custodian or a third-chain smart contract for the trade to settle.</div></section>
@@ -1117,71 +241,66 @@ a.cc6d88e:hover {
 <details class="cdfda14"><summary class="ccf73eb">Can I check my Monero Swap transaction on an explorer?</summary><div class="cbcfb16">You can verify your own transfer's confirmation status using your wallet's view key against an explorer such as xmrchain.net, though Monero's ring signatures and stealth addresses mean you cannot see other people's amounts the way you would on a transparent chain.</div></details>
 <details class="cdfda14"><summary class="ccf73eb">What's the biggest risk in a Monero Swap?</summary><div class="cbcfb16">The practical risks are an expired quote, an underpriced fee that delays confirmation, or sending to the wrong address — not a central vault being compromised, since a non-custodial swap never holds your funds in one place.</div></details>
   </main>
-  <section class="c5fe5fa c87d5aa" aria-labelledby="sources-title">
+  <section class="ca87e6b c6f1419" id="sources" aria-labelledby="sources-title">
     <h2 class="c54098a" id="sources-title">Sources</h2>
     <ul class="c1719d3"><li><a class="cc6d88e" href="https://getmonero.org/" rel="nofollow noopener" target="_blank">Monero documentation</a></li>
 <li><a class="cc6d88e" href="https://xmrchain.net/" rel="nofollow noopener" target="_blank">Monero block explorer</a></li>
 <li><a class="cc6d88e" href="https://en.wikipedia.org/wiki/Monero" rel="nofollow noopener" target="_blank">Monero — Wikipedia</a></li>
 <li><a class="cc6d88e" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
   </section>
-  <footer class="c9c5cb0">
-    <span class="c58c578">Exchange</span>
-    <p class="c0b22ee">Updated <span>Updated Oct 10, 2026</span></p>
+  <footer class="cfa3517">
+    <div class="cf0dd82 c6f1419">
+      <p>Updated Oct 11, 2026</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
   </footer>
-</div>
-<script>
-(() => {
-  'use strict';
-  const amount = document.getElementById('amount');
-  const received = document.getElementById('received');
-  const rateOutput = document.getElementById('rate');
-  const feeOutput = document.getElementById('network-fee');
-  const message = document.getElementById('amount-message');
-  const exchangeRate = 0.985;
-  const baseFee = 0.25;
-  const networkFactor = 0.001;
-  const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 6 });
-  let timer;
-
-  function clearQuote() {
-    received.value = '—';
-    rateOutput.value = '—';
-    feeOutput.value = '—';
-  }
-
-  function updateQuote() {
-    clearTimeout(timer);
-    const raw = amount.value.trim();
-    const value = amount.valueAsNumber;
-    const valid = raw !== '' && Number.isFinite(value) && value >= 1 && value <= 1000000 && !amount.validity.badInput;
-    amount.setAttribute('aria-invalid', String(!valid));
-    message.dataset.invalid = String(!valid);
-    if (!valid) {
-      clearQuote();
-      const error = 'Enter an amount from 1 to 1,000,000.';
-      amount.setCustomValidity(error);
-      message.textContent = error;
-      return;
-    }
-    amount.setCustomValidity('');
-    const networkFee = baseFee + value * networkFactor;
-    const netAmount = Math.max(0, value * exchangeRate - networkFee);
-    received.value = formatter.format(netAmount);
-    rateOutput.value = '1 → ' + formatter.format(exchangeRate);
-    feeOutput.value = formatter.format(networkFee) + ' destination units';
-    message.textContent = '';
-  }
-
-  amount.addEventListener('input', () => {
-    clearTimeout(timer);
-    amount.setCustomValidity('');
-    clearQuote();
-    timer = setTimeout(updateQuote, 200);
-  });
-  amount.addEventListener('change', updateQuote);
-  amount.addEventListener('blur', updateQuote);
-  updateQuote();
-})();
-</script>
+  <script>
+    (() => {
+      const TOKENS = [
+        { s: 'ETH', f: 'eth', p: 2550 }, { s: 'BTC', f: 'btc', p: 62000 },
+        { s: 'USDT', f: 'usdt', p: 1 }, { s: 'USDC', f: 'usdc', p: 1 },
+        { s: 'BNB', f: 'bnb', p: 585 }, { s: 'SOL', f: 'sol', p: 145 },
+        { s: 'ARB', f: 'arb', p: 0.62 }, { s: 'OP', f: 'optimism', p: 1.65 },
+        { s: 'MATIC', f: 'polygon', p: 0.42 }, { s: 'AVAX', f: 'avalanche', p: 27 },
+        { s: 'SUI', f: 'sui', p: 1.35 }, { s: 'LTC', f: 'ltc', p: 72 },
+        { s: 'TRX', f: 'trx', p: 0.16 }, { s: 'XMR', f: 'xmr', p: 155 },
+        { s: 'XRP', f: 'xrp', p: 0.52 }, { s: 'ZEC', f: 'zec', p: 32 }
+      ];
+      const FEE = 0.003;
+      const $ = (id) => document.getElementById(id);
+      const payAmt = $('pay-amount'), payTok = $('pay-token'), payUsd = $('pay-usd'), payIco = $('pay-ico');
+      const getAmt = $('get-amount'), getTok = $('get-token'), getUsd = $('get-usd'), getIco = $('get-ico');
+      const rateEl = $('swap-rate');
+      const tok = (s) => TOKENS.find((t) => t.s === s);
+      const num = (n) => new Intl.NumberFormat('en', { maximumFractionDigits: n >= 1 ? 4 : 6 }).format(n);
+      const usd = (v) => '~$' + new Intl.NumberFormat('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+      TOKENS.forEach((t) => {
+        [payTok, getTok].forEach((sel) => { const o = document.createElement('option'); o.value = t.s; o.textContent = t.s; sel.appendChild(o); });
+      });
+      const widget = document.querySelector('.c7299e0');
+      const defFrom = (widget && widget.dataset.from) || 'ETH';
+      const fromOk = TOKENS.some((t) => t.s === defFrom) ? defFrom : 'ETH';
+      payTok.value = fromOk;
+      getTok.value = (fromOk === 'USDT') ? 'ETH' : 'USDT';
+      const calc = () => {
+        const pf = tok(payTok.value), gt = tok(getTok.value);
+        payIco.src = 'assets/tokens/' + pf.f + '.svg'; payIco.alt = pf.s;
+        getIco.src = 'assets/tokens/' + gt.f + '.svg'; getIco.alt = gt.s;
+        rateEl.textContent = '1 ' + pf.s + ' ≈ ' + num(pf.p / gt.p) + ' ' + gt.s;
+        const a = parseFloat(payAmt.value);
+        if (!Number.isFinite(a) || a <= 0) { getAmt.textContent = '—'; payUsd.textContent = '—'; getUsd.textContent = '—'; return; }
+        const out = a * (pf.p / gt.p) * (1 - FEE);
+        getAmt.textContent = num(out) + ' ' + gt.s;
+        payUsd.textContent = usd(a * pf.p);
+        getUsd.textContent = usd(out * gt.p);
+      };
+      const distinct = (changed, other) => { if (changed.value === other.value) { other.value = (TOKENS.find((t) => t.s !== changed.value) || TOKENS[0]).s; } };
+      payAmt.addEventListener('input', calc);
+      payTok.addEventListener('change', () => { distinct(payTok, getTok); calc(); });
+      getTok.addEventListener('change', () => { distinct(getTok, payTok); calc(); });
+      $('swap-switch').addEventListener('click', () => { const t = payTok.value; payTok.value = getTok.value; getTok.value = t; calc(); });
+      calc();
+    })();
+  </script>
 </body>
 </html>
