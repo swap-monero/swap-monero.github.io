@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Send Monero — Wallet Transfer Guide for XMR</title>
+  <meta name="description" content="How to Send Monero from your own wallet: pick the right address type, set a fee priority, broadcast the transfer, and learn how many confirmations XMR needs.">
+  <link rel="canonical" href="https://swap-monero.github.io/how-to-send-monero/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How to Send Monero from Your Wallet">
+  <meta property="og:description" content="How to Send Monero from your own wallet: pick the right address type, set a fee priority, broadcast the transfer, and learn how many confirmations XMR needs.">
+  <meta property="og:url" content="https://swap-monero.github.io/how-to-send-monero/">
+  <meta property="og:image" content="https://swap-monero.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Send Monero from Your Wallet">
+  <meta name="twitter:description" content="How to Send Monero from your own wallet: pick the right address type, set a fee priority, broadcast the transfer, and learn how many confirmations XMR needs.">
+  <meta name="twitter:image" content="https://swap-monero.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-monero.github.io/#website", "url": "https://swap-monero.github.io/how-to-send-monero/", "name": "How to Send Monero — Wallet Transfer Guide for XMR"}, {"@type": "WebPage", "@id": "https://swap-monero.github.io/#webpage", "url": "https://swap-monero.github.io/how-to-send-monero/", "name": "How to Send Monero — Wallet Transfer Guide for XMR", "isPartOf": {"@id": "https://swap-monero.github.io/#website"}, "description": "How to Send Monero from your own wallet: pick the right address type, set a fee priority, broadcast the transfer, and learn how many confirmations XMR needs.", "datePublished": "2026-10-12", "dateModified": "2026-10-12"}, {"@type": "SoftwareApplication", "name": "How to Send Monero", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-monero.github.io/how-to-send-monero/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "How to Send Monero"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I send Monero from my wallet?", "acceptedAnswer": {"@type": "Answer", "text": "Open your wallet, select Send, paste the recipient's address, enter the amount, choose a fee priority, then review the summary and confirm to broadcast. The transaction signs locally and the network delivers it; the recipient waits for ten confirmations before spending."}}, {"@type": "Question", "name": "Which Monero address type should I send to?", "acceptedAnswer": {"@type": "Answer", "text": "Send to whatever the recipient gives you — standard (starts with 4), subaddress (starts with 8), or integrated (starts with 4, 106 characters). Your wallet reads the prefix and routes correctly, so you just paste the exact string they provided."}}, {"@type": "Question", "name": "How much does it cost to send Monero?", "acceptedAnswer": {"@type": "Answer", "text": "Fees are small and set by transaction size and the priority tier you pick, not by the amount sent — usually a fraction of a cent to a few cents' worth of XMR under normal load. Raising priority adds fee for faster inclusion when blocks are busy."}}, {"@type": "Question", "name": "How long before the recipient can spend what I send?", "acceptedAnswer": {"@type": "Answer", "text": "Monero locks received outputs for ten blocks, roughly twenty minutes, before they become spendable. The recipient sees the incoming payment within a block or two but can't move it onward until that lock clears."}}, {"@type": "Question", "name": "Is sending Monero private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, automatically. Every transfer uses ring signatures to hide the sender and a one-time stealth address to hide the recipient, so there is no public balance or amount to look up and nothing to switch on."}}, {"@type": "Question", "name": "Can I cancel a Monero transaction after sending?", "acceptedAnswer": {"@type": "Answer", "text": "No. Once a transaction is broadcast and confirmed it cannot be reversed or recalled, which is why checking the destination address and amount before you confirm matters so much."}}, {"@type": "Question", "name": "Do I need an account to send Monero?", "acceptedAnswer": {"@type": "Answer", "text": "No sign-up is needed to run a self-custody wallet and send from it. You control the keys and sign locally; sending through an exchange is different and follows that platform's own rules."}}]}]}</script>
+  <style>
+    :root{--bg:#FAFBFD;--surface:#FFFFFF;--text:#111725;--muted:#586072;--accent:#4F46E5;--accent-ink:#FFFFFF;--radius:12px;--display:"Sora";--body:"Inter"}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 1rem/1.7 var(--body); -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: .12em; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--display); line-height: 1.15; text-wrap: balance; }
+    p, h1, h2, h3 { margin-top: 0; }
+    img, svg { max-width: 100%; vertical-align: middle; }
+    .c191d23 { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
+    .ca73176 { position: absolute; z-index: 5; top: .5rem; left: 1rem; padding: .7rem 1rem; background: var(--surface); transform: translateY(-180%); border-radius: var(--radius); }
+    .ca73176:focus { transform: translateY(0); }
+    .cd93a50 { border-bottom: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .c3a3409 { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .c0a16af { display: inline-flex; align-items: center; gap: .7rem; color: var(--text); font: 650 1.12rem/1.2 var(--display); text-decoration: none; }
+    .cdcff47 { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: calc(var(--radius) * .6); background: var(--accent); color: var(--accent-ink); }
+    .cb14f7a { width: 1.2rem; height: 1.2rem; fill: none; stroke: var(--accent-ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+    .caa68ae { display: flex; align-items: center; gap: 1.8rem; }
+    .caa68ae > a { font-size: .88rem; font-weight: 600; text-decoration: none; }
+    .caa68ae > a:not(.cea1886) { color: var(--muted); }
+    .cea1886 { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 52px; padding: .85rem 1.4rem; border: 1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent); border-radius: var(--radius); background: linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 88%,var(--text))); color: var(--accent-ink); font: 650 .95rem/1.3 var(--body); text-decoration: none; box-shadow: 0 6px 18px color-mix(in srgb,var(--accent) 17%,transparent); transition: transform .18s ease, box-shadow .18s ease; }
+    .cea1886:hover { transform: translateY(-2px); box-shadow: 0 9px 24px color-mix(in srgb,var(--accent) 25%,transparent); }
+    .c3a3409 .cea1886 { min-height: 42px; padding: .65rem 1rem; }
+    .cf34d41 { padding-block: 1rem 0; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+    .cddd0db { color: var(--muted); }
+    .cddd0db a, a.cddd0db { color: var(--muted); text-decoration: none; }
+    .cddd0db a:hover, a.cddd0db:hover { color: var(--accent); text-decoration: underline; }
+    .cddd0db ol, .cddd0db ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; padding: 0; margin: 0; list-style: none; }
+    .c408534 { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: clamp(2rem,5vw,4.5rem); align-items: start; padding-block: 1.5rem 3rem; }
+    .cb29fce { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.3rem; color: var(--accent); font-size: .86rem; font-weight: 600; }
+    .cb29fce::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb,var(--accent) 9%,transparent); }
+    h1 { margin-bottom: 1.4rem; font-size: clamp(2.5rem,4.7vw,4.35rem); font-weight: 600; letter-spacing: -.055em; overflow-wrap: anywhere; }
+    h1 em { color: var(--accent); font-style: normal; }
+    .c1ccd17 { max-width: 48ch; margin-bottom: 2rem; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
+    .c2806cd { position: relative; min-width: 0; padding: clamp(1.1rem,2.4vw,1.5rem); border: 1px solid color-mix(in srgb,var(--accent) 20%,var(--surface)); border-radius: calc(var(--radius) * 1.6); background: linear-gradient(155deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface) 40%); box-shadow: 0 24px 64px color-mix(in srgb,var(--text) 9%,transparent),0 4px 12px color-mix(in srgb,var(--accent) 6%,transparent); }
+    .c6ce287 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: 1rem; }
+    .c6ce287 h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.035em; }
+    .c765333 { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); border-radius: 999px; background: color-mix(in srgb,var(--accent) 8%,var(--surface)); color: var(--accent); font-size: .72rem; font-weight: 600; }
+    .c765333::before { content: ""; width: .35rem; height: .35rem; border-radius: 50%; background: var(--accent); }
+    .route { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: .8rem; padding: .8rem; margin-bottom: 1rem; border: 1px solid color-mix(in srgb,var(--text) 9%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .endpoint { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+    .endpoint:last-child { align-items: flex-end; }
+    .endpoint-label, .c49155b { color: var(--muted); font-size: .78rem; font-weight: 500; }
+    .logo { display: flex; align-items: center; min-height: 36px; max-width: 100%; overflow-wrap: anywhere; font: 600 1rem/1.3 var(--display); }
+    .logo img, .logo svg { max-height: 36px; width: auto; max-width: 100%; object-fit: contain; }
+    .route-arrow { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb,var(--accent) 9%,var(--surface)); }
+    .route-arrow .cb14f7a { stroke: var(--accent); }
+    .c49155b { display: block; margin-bottom: .5rem; color: var(--text); }
+    .amount-field { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 18%,transparent); border-radius: var(--radius); background: var(--bg); transition: border-color .18s ease; }
+    .amount-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); }
+    .amount-field input { width: 100%; min-width: 0; padding: .2rem 0; border: 0; background: var(--bg); color: var(--text); font: 550 1.6rem/1.2 var(--display); font-variant-numeric: tabular-nums; }
+    .amount-field input:focus { outline: 0; }
+    .unit { color: var(--muted); font-size: .8rem; }
+    .c433c1d { margin: .45rem 0 .85rem; color: var(--muted); font-size: .74rem; }
+    .field-error { margin: .5rem 0; color: var(--text); font-size: .8rem; font-weight: 600; }
+    [hidden] { display: none !important; }
+    .estimate { padding: 1rem; border-radius: var(--radius); background: linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--accent) 4%,var(--surface))); }
+    .estimate-label { margin-bottom: .25rem; color: var(--muted); font-size: .8rem; }
+    .estimate-value { display: block; color: var(--text); font: 600 clamp(1.7rem,3vw,2.5rem)/1.3 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .estimate-value small { color: var(--muted); font: 400 .8rem/1.4 var(--body); letter-spacing: 0; }
+    .estimate dl { display: grid; gap: .5rem; margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .8rem; }
+    .estimate dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; }
+    .estimate dt { color: var(--muted); }
+    .estimate dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .method { margin-block: .7rem; color: var(--muted); font-size: .75rem; }
+    .method summary { width: fit-content; color: var(--text); cursor: pointer; }
+    .method p { margin: .65rem 0 0; }
+    .c2806cd > .cea1886 { width: 100%; }
+    .c72f709 { padding: .8rem 1rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: var(--radius); background: var(--surface); }
+    .cd9cc7c { margin-bottom: .45rem; }
+    .cc92520 { display: flex; align-items: center; gap: .75rem; }
+    .cf624d5 { flex: 1; min-width: 0; padding: 0; border: 0; background: transparent; color: var(--text); font: 550 1.55rem/1.2 var(--display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .cf624d5:focus { outline: 0; }
+    .c94162f { position: relative; display: inline-flex; align-items: center; gap: .5rem; flex: none; padding: .4rem 1.5rem .4rem .5rem; border: 1px solid color-mix(in srgb,var(--text) 13%,transparent); border-radius: 999px; background: var(--bg); }
+    .ce2602b { width: 22px; height: 22px; border-radius: 50%; object-fit: contain; flex: none; }
+    .c3cc1ad { border: 0; background: transparent; color: var(--text); font: 600 .95rem/1 var(--body); cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .c3cc1ad:focus { outline: 0; }
+    .c94162f::after { content: ""; position: absolute; right: .7rem; width: .42rem; height: .42rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-2px) rotate(45deg); pointer-events: none; }
+    .c1888b2 { margin-top: .4rem; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+    .c6439b1 { position: relative; z-index: 1; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin: -.55rem auto; padding: 0; border: 3px solid var(--surface); border-radius: 50%; background: color-mix(in srgb,var(--accent) 13%,var(--surface)); color: var(--accent); cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .c6439b1 svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .c6439b1:hover { transform: rotate(180deg); background: color-mix(in srgb,var(--accent) 20%,var(--surface)); }
+    .c38a0b9 { display: grid; gap: .5rem; margin: 1rem 0 0; padding-top: .9rem; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font-size: .82rem; }
+    .c38a0b9 div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem 1rem; }
+    .c38a0b9 dt { color: var(--muted); }
+    .c38a0b9 dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cd0ca14 > .cea1886 { width: 100%; margin-top: 1.05rem; }
+    .c1ac271 { padding: 2rem; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); border-radius: calc(var(--radius) * 1.3); background: var(--surface); }
+    .c6758cd { margin-bottom: 1.3rem; font-size: 1.65rem; font-weight: 550; letter-spacing: -.035em; }
+    .cd38196 { max-width: 100%; overflow-x: auto; }
+    .c8fe036 { width: 100%; border-collapse: collapse; text-align: left; font-size: .92rem; }
+    .c8fe036 caption { padding-bottom: 1rem; text-align: left; color: var(--muted); }
+    .c8fe036 th, .c8fe036 td { padding: 1rem 1.1rem; border-bottom: 1px solid color-mix(in srgb,var(--text) 9%,transparent); vertical-align: top; overflow-wrap: anywhere; }
+    .c8fe036 th { color: var(--muted); font-weight: 500; }
+    .c8fe036 thead { background: color-mix(in srgb,var(--accent) 5%,var(--surface)); }
+    .c8fe036 tbody tr:last-child > * { border-bottom: 0; }
+    .c0e9dba { max-width: 820px; padding-block: 4rem 2rem; }
+    .c35d614 { margin-bottom: 3.3rem; }
+    .c60cb1c { margin: 0 0 1.1rem; font: 550 clamp(1.6rem,3vw,2.2rem)/1.2 var(--display); letter-spacing: -.035em; }
+    .c0c4b02 { color: var(--muted); line-height: 1.85; overflow-wrap: anywhere; }
+    .c0c4b02 p { margin-bottom: 1.2rem; }
+    .c0c4b02 strong, .c0c4b02 h3, .c0c4b02 h4 { color: var(--text); }
+    .c0c4b02 ul, .c0c4b02 ol { padding-left: 1.3rem; }
+    .c0c4b02 li { padding-left: .3rem; margin-block: .55rem; }
+    .c0c4b02 li::marker { color: var(--accent); }
+    .c0c4b02 blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--surface); color: var(--text); }
+    .c0c4b02 img { height: auto; border-radius: var(--radius); }
+    .c0c4b02 pre { overflow-x: auto; padding: 1rem; border-radius: var(--radius); background: var(--surface); }
+    .c0c4b02 code, .c0c4b02 pre { font-family: var(--body); }
+    .ce43bec { margin-block: .8rem; border: 1px solid color-mix(in srgb,var(--text) 11%,transparent); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .c8b91e0 { position: relative; padding: 1.3rem 3.5rem 1.3rem 1.4rem; list-style: none; cursor: pointer; color: var(--text); font: 550 1.04rem/1.5 var(--display); }
+    .c8b91e0::-webkit-details-marker { display: none; }
+    .c8b91e0::after { content: "+"; position: absolute; right: 1.4rem; top: 1.2rem; color: var(--accent); font-size: 1.3rem; }
+    details[open] > .c8b91e0::after { content: "−"; }
+    .ce43bec[open] { border-color: color-mix(in srgb,var(--accent) 35%,var(--surface)); }
+    .c8b91e0:focus-visible { outline-offset: -5px; }
+    .c68dc3b { padding: 0 1.4rem 1.4rem; color: var(--muted); overflow-wrap: anywhere; }
+    .c68dc3b > :last-child { margin-bottom: 0; }
+    .c251a37 { max-width: 820px; padding-block: 1.5rem 3.5rem; border-top: 1px solid color-mix(in srgb,var(--text) 12%,transparent); }
+    .c251a37 .c6758cd { font-size: 1.25rem; }
+    .ce1eb65 { margin: 0; padding-left: 1.25rem; color: var(--muted); font-size: .88rem; }
+    .caccc5e { padding-block: .4rem; padding-left: .25rem; overflow-wrap: anywhere; }
+    .caccc5e a, a.caccc5e { color: var(--text); text-decoration-color: color-mix(in srgb,var(--accent) 45%,transparent); }
+    .caccc5e a:hover, a.caccc5e:hover { color: var(--accent); }
+    .c8c8866 { border-top: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+    .cf80dd1 { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; min-height: 96px; padding-block: 1.5rem; color: var(--muted); font-size: .8rem; }
+    .cf80dd1 p { margin: 0; }
+    .cf80dd1 a { color: var(--muted); }
+    @media (max-width: 850px) { .c408534 { grid-template-columns: minmax(0,1fr); gap: 2.5rem; padding-block: 2.5rem 3.5rem; } .cd34a55 { max-width: 650px; } .c2806cd { width: 100%; max-width: 600px; justify-self: center; } h1 { font-size: clamp(2.5rem,7vw,4rem); } .c1ccd17 { max-width: 60ch; } }
+    @media (max-width: 540px) { .c191d23 { width: calc(100% - 2rem); } .c3a3409 { min-height: 76px; gap: .7rem; } .c0a16af { font-size: .95rem; gap: .45rem; } .cdcff47 { width: 2rem; height: 2rem; } .caa68ae { gap: .6rem; } .caa68ae > a:not(.cea1886) { display: none; } .c3a3409 .cea1886 { padding-inline: .85rem; font-size: .8rem; } .c1ac271 { padding: 1.25rem; } .c8fe036 th, .c8fe036 td { padding: .8rem .55rem; } .cd34a55 > .cea1886 { width: 100%; } .c0e9dba { padding-top: 2.8rem; } .cf80dd1 { align-items: flex-start; flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .cea1886, .amount-field { transition: none; } .cea1886:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <a class="ca73176" href="#content">Skip to content</a>
+  <header class="cd93a50">
+    <nav class="c3a3409 c191d23" aria-label="Primary navigation">
+      <a class="c0a16af" href="#top" aria-label="Swap station, top of page">
+        <span class="cdcff47" aria-hidden="true"><svg class="cb14f7a" viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>
+        Swap station
+      </a>
+      <div class="caa68ae">
+        <a href="#facts">Key facts</a>
+        <a href="#sources">Sources</a>
+        <a class="cea1886" href="/dashboard/">Swap</a>
+      </div>
+    </nav>
+  </header>
+  <div class="c191d23" id="top">
+    <div class="cf34d41"><nav class="cddd0db" aria-label="Breadcrumb"><a href="/dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>How to Send Monero</span></nav></div>
+    <section class="c408534" aria-labelledby="hero-title">
+      <div class="cd34a55">
+        <p class="cb29fce">All swap routes</p>
+        <h1 id="hero-title">How to Send <em>Monero</em></h1>
+        <p class="c1ccd17">To send Monero, open your wallet, paste the recipient's address, enter the amount, choose a fee priority, and broadcast the transaction — the network does the rest.</p>
+        <a class="cea1886" href="/dashboard/">Swap <svg class="cb14f7a" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </div>
+      <aside class="c2806cd cd0ca14" data-from="XMR" aria-labelledby="widget-title">
+        <div class="c6ce287">
+          <h2 id="widget-title">Swap</h2>
+          <span class="c765333">Best route</span>
+        </div>
+        <div class="c72f709">
+          <div class="cd9cc7c"><span class="c49155b">You pay</span></div>
+          <div class="cc92520">
+            <input id="pay-amount" class="cf624d5" type="number" inputmode="decimal" min="0" max="1000000000" step="any" value="1" aria-label="Amount you pay">
+            <span class="c94162f">
+              <img class="ce2602b" id="pay-ico" width="22" height="22" alt="" src="assets/tokens/eth.svg">
+              <select id="pay-token" class="c3cc1ad" aria-label="Token you pay"></select>
+            </span>
+          </div>
+          <div class="c1888b2" id="pay-usd">—</div>
+        </div>
+        <button type="button" class="c6439b1" id="swap-switch" aria-label="Switch the two tokens">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v13m0 0-3-3m3 3 3-3M17 20V7m0 0-3 3m3-3 3 3"/></svg>
+        </button>
+        <div class="c72f709">
+          <div class="cd9cc7c"><span class="c49155b">You receive</span></div>
+          <div class="cc92520">
+            <output id="get-amount" class="cf624d5" for="pay-amount">—</output>
+            <span class="c94162f">
+              <img class="ce2602b" id="get-ico" width="22" height="22" alt="" src="assets/tokens/usdt.svg">
+              <select id="get-token" class="c3cc1ad" aria-label="Token you receive"></select>
+            </span>
+          </div>
+          <div class="c1888b2" id="get-usd">—</div>
+        </div>
+        <dl class="c38a0b9">
+          <div><dt>Rate</dt><dd id="swap-rate">—</dd></div>
+          <div><dt>Network fee</dt><dd id="swap-fee">0.3%</dd></div>
+        </dl>
+        <noscript><p class="c433c1d">Enable JavaScript to estimate the swap.</p></noscript>
+        <a class="cea1886" href="/dashboard/">Swap <svg class="cb14f7a" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </aside>
+    </section>
+    <section class="c1ac271" id="facts" aria-labelledby="facts-title">
+      <h2 class="c6758cd" id="facts-title">Key facts</h2>
+      <div class="cd38196"><table class="c8fe036"><tbody><tr><th scope="row">Confirmations to spend</th><td>10 blocks (~20 minutes) before XMR unlocks</td></tr>
+<tr><th scope="row">Block time</th><td>~2 minutes per Monero block</td></tr>
+<tr><th scope="row">Standard address</th><td>95 characters, starts with 4</td></tr>
+<tr><th scope="row">Subaddress</th><td>Starts with 8, unlimited per account</td></tr>
+<tr><th scope="row">Privacy</th><td>Ring signatures and stealth addresses, always on</td></tr>
+<tr><th scope="row">Account</th><td>None — no sign-up to run a wallet</td></tr></tbody></table></div>
+    </section>
+  </div>
+  <main class="c0e9dba c191d23" id="content">
+    <section class="c35d614"><h2 class="c60cb1c">What You Need Before You Send Monero</h2><div class="c0c4b02"><strong>Sending Monero takes three things: a funded wallet you control, the recipient's correct address, and an unlocked balance that has cleared its own confirmation window.</strong> Unlike a transparent chain, Monero shows you nothing about the destination wallet, so the address string itself is the only thing you can verify — there is no public balance or history to cross-check. That puts the responsibility on you to confirm the address is right and the amount is correct before broadcasting, because a confirmed Monero transaction cannot be reversed or recalled. The canonical reference for every wallet behavior described here lives in the <a href="https://www.getmonero.org/resources/user-guides/" rel="nofollow noopener" target="_blank">Monero user guides</a>.<h3>A Wallet You Actually Control</h3>You can only send from a wallet whose keys you hold — an official GUI or CLI client, a reputable mobile wallet, or a hardware device paired with one of those. An exchange "send" button is not the same thing; that moves the exchange's coins on your instruction and follows the exchange's rules. If you want the privacy and finality this guide describes, send from self-custody where you sign the transaction locally.<h3>An Unlocked Balance</h3>Monero funds you received are locked for ten blocks before you can spend them again, the same depth a recipient waits on your transfer. Your wallet usually shows an "unlocked balance" separate from the total; if a send fails for insufficient funds even though the total looks high enough, the difference is almost always coins still inside that lock window.</div></section>
+<section class="c35d614"><h2 class="c60cb1c">Monero Address Types Explained</h2><div class="c0c4b02">Monero has three address formats, and picking the right one avoids the most common send confusion. All three are private on the network, but they differ in how the recipient tells payments apart and how long the string is. The <a href="https://www.getmonero.org/resources/moneropedia/address.html" rel="nofollow noopener" target="_blank">Moneropedia address entry</a> defines each format precisely.<table><thead><tr><th>Address type</th><th>Format</th><th>When to use</th></tr></thead><tbody><tr><td>Standard</td><td>95 characters, starts with 4</td><td>A wallet's primary address; fine for one-off receipts</td></tr><tr><td>Subaddress</td><td>95 characters, starts with 8</td><td>Preferred default; unlimited unlinkable addresses per account</td></tr><tr><td>Integrated</td><td>106 characters, starts with 4</td><td>Legacy exchange deposits that still require a payment ID</td></tr></tbody></table><h3>Standard, Subaddress, and Integrated</h3>A <em>standard</em> address is the main public address of a wallet and begins with the digit 4. A <em>subaddress</em> begins with 8 and lets one wallet hand out unlimited separate addresses that cannot be linked to each other, which is the modern way to keep payments organized. An <em>integrated</em> address bundles a standard address with a payment ID, once common for exchange deposits but now largely superseded by subaddresses. Whatever the recipient gives you, paste it exactly — your wallet reads the prefix and routes the send correctly.<h3>Which Address the Recipient Should Give You</h3>When you are the sender, you simply use whatever the recipient provides; you do not choose their format. If you are also the recipient in a later transfer, prefer a fresh subaddress per payer so nobody can correlate your incoming payments. Avoid reusing a single standard address for many senders when a subaddress would keep those payments distinct.</div></section>
+<section class="c35d614"><h2 class="c60cb1c">How to Send Monero Step by Step</h2><div class="c0c4b02">The flow below matches the official GUI and CLI wallets and is nearly identical in reputable mobile wallets. Follow it in order; the only irreversible moment is the final broadcast.<ul><li>Open your wallet and confirm the unlocked balance covers both the amount and the network fee.</li><li>Select Send, then paste the recipient's address and let the wallet validate the prefix and checksum.</li><li>Enter the amount in XMR, and if the recipient asked for a payment ID, add it only when using a legacy integrated flow.</li><li>Choose a fee priority — default is fine for most transfers, higher priority for faster confirmation.</li><li>Review the on-screen summary: destination, amount, and total fee, then confirm to sign and broadcast.</li><li>Note the transaction ID, and wait for ten confirmations before the recipient can spend the received XMR.</li></ul></div></section>
+<section class="c35d614"><h2 class="c60cb1c">Transaction Fees and Priority Levels</h2><div class="c0c4b02">Monero fees are small and are driven by transaction size and the priority you pick, not by the amount you send. Priority is a multiplier: a higher setting attaches a larger fee so miners include your transaction sooner when blocks are busy. On a quiet network the default confirms just as fast as any higher tier, so there is rarely a reason to overpay. The table below shows the usual priority tiers and the confirmation behavior each one buys.<table><thead><tr><th>Priority</th><th>Relative fee</th><th>Typical confirmation</th></tr></thead><tbody><tr><td>Default / Normal</td><td>Lowest</td><td>First confirmation in ~2–4 minutes</td></tr><tr><td>Elevated</td><td>Higher</td><td>Prioritized when blocks are filling</td></tr><tr><td>Priority / Highest</td><td>Highest</td><td>Front of the queue during congestion</td></tr></tbody></table><h3>Why Fees Stay Low</h3>Monero uses a dynamic block size and a fee algorithm that keeps the base cost of a transfer tiny under normal load, typically a fraction of a cent to a few cents' worth of XMR. Live network conditions and historical fee levels are easy to check on a block explorer such as <a href="https://blockchair.com/monero" rel="nofollow noopener" target="_blank">Blockchair's Monero explorer</a> before you send during a busy spell.<h3>Setting Fee Priority Without Overpaying</h3>Leave priority at the default unless you have a specific deadline. If a transfer must clear quickly during congestion, step up one tier rather than jumping straight to the top — each step roughly multiplies the fee. Setting a fee far too low is the opposite mistake and can leave a transaction sitting unconfirmed for far longer than planned.</div></section>
+<section class="c35d614"><h2 class="c60cb1c">Privacy When You Send Monero</h2><div class="c0c4b02">Monero's privacy is not a setting you enable — it is applied to every outgoing transfer automatically, which changes how you reason about a send compared with a transparent chain.<h3>Ring Signatures Hide the Sender</h3>Each transfer is signed with a <em>ring signature</em> that mixes your real output among several decoys pulled from the chain, so an observer has no way to tell which input actually funded the payment. You do nothing to switch this on; the wallet builds it into every transaction. Background on the mechanism is laid out on the <a href="https://www.getmonero.org/" rel="nofollow noopener" target="_blank">Monero project site</a>.<h3>Stealth Addresses Hide the Recipient</h3>The address you paste is never what appears on the ledger. Your wallet derives a one-time <em>stealth address</em> for the payment, so even two sends to the same recipient look unrelated on-chain. This is why you cannot look up a destination's balance before sending — there is nothing public to look up, and that is by design.</div></section>
+<section class="c35d614"><h2 class="c60cb1c">Confirmations Before the Recipient Can Spend</h2><div class="c0c4b02">A broadcast transaction is not immediately spendable by the person receiving it. Monero locks received outputs for ten blocks, so the recipient sees the incoming payment quickly but must wait roughly twenty minutes before those coins can be sent onward. If you are paying for something time-sensitive, build that window into your plan rather than assuming the first confirmation means done.<h3>Checking Your Own Transaction Status</h3>You can follow your transfer using the transaction ID your wallet recorded. With your private view key you can verify it against an explorer without exposing anyone else's amounts, and you can prove a payment to a recipient by sharing the transaction key the wallet generated. Pricing and market context for the amount you are sending are easy to pull from <a href="https://www.coingecko.com/" rel="nofollow noopener" target="_blank">CoinGecko</a> if you need a fiat reference.<h3>What the Recipient Sees</h3>The recipient's wallet shows the payment as incoming almost at once but marked unconfirmed, then locked, then spendable after the tenth confirmation. A cautious counterpart in a trade will wait for that full depth before treating the funds as settled, so do not be surprised if a merchant or exchange holds briefly after the first block.</div></section>
+<section class="c35d614"><h2 class="c60cb1c">Common Send Mistakes to Avoid</h2><div class="c0c4b02">Most failed or stuck Monero sends come from a short list of avoidable errors, and knowing them in advance removes almost all of the risk. None of these are hacks of a central vault, because sending from self-custody means there is no vault — the mistakes are entirely in how the transfer was built.<h3>Wrong Address or Missing Payment ID</h3>Pasting an address with a dropped character is caught by the checksum, but pasting a correct address for the wrong recipient is not — there is no undo once confirmed. If a legacy exchange deposit requires a payment ID and you omit it, the funds can be hard to credit, which is exactly why subaddresses replaced that flow. Always confirm the destination out of band when the amount is large.<h3>Fee Too Low or Balance Still Locked</h3>A fee set far below network conditions can leave a transfer unconfirmed well past your deadline. Trying to spend coins still inside their ten-block lock produces an insufficient-funds error even when the total balance looks ample. Check the unlocked balance first and leave priority at default unless you genuinely need speed.</div></section><section class="c35d614 cbd6753" id="cluster"><h2 class="c60cb1c">More in this series</h2><div class="c0c4b02"><ul><li><a href="/">Monero Swap</a></li><li><a href="/how-to-swap-monero/">How to Swap Monero</a></li><li><a href="/monero-transfer-time/">How Long Does Monero Take to Transfer</a></li></ul></div></section>
+    <details class="ce43bec"><summary class="c8b91e0">How do I send Monero from my wallet?</summary><div class="c68dc3b">Open your wallet, select Send, paste the recipient's address, enter the amount, choose a fee priority, then review the summary and confirm to broadcast. The transaction signs locally and the network delivers it; the recipient waits for ten confirmations before spending.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">Which Monero address type should I send to?</summary><div class="c68dc3b">Send to whatever the recipient gives you — standard (starts with 4), subaddress (starts with 8), or integrated (starts with 4, 106 characters). Your wallet reads the prefix and routes correctly, so you just paste the exact string they provided.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">How much does it cost to send Monero?</summary><div class="c68dc3b">Fees are small and set by transaction size and the priority tier you pick, not by the amount sent — usually a fraction of a cent to a few cents' worth of XMR under normal load. Raising priority adds fee for faster inclusion when blocks are busy.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">How long before the recipient can spend what I send?</summary><div class="c68dc3b">Monero locks received outputs for ten blocks, roughly twenty minutes, before they become spendable. The recipient sees the incoming payment within a block or two but can't move it onward until that lock clears.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">Is sending Monero private?</summary><div class="c68dc3b">Yes, automatically. Every transfer uses ring signatures to hide the sender and a one-time stealth address to hide the recipient, so there is no public balance or amount to look up and nothing to switch on.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">Can I cancel a Monero transaction after sending?</summary><div class="c68dc3b">No. Once a transaction is broadcast and confirmed it cannot be reversed or recalled, which is why checking the destination address and amount before you confirm matters so much.</div></details>
+<details class="ce43bec"><summary class="c8b91e0">Do I need an account to send Monero?</summary><div class="c68dc3b">No sign-up is needed to run a self-custody wallet and send from it. You control the keys and sign locally; sending through an exchange is different and follows that platform's own rules.</div></details>
+  </main>
+  <section class="c251a37 c191d23" id="sources" aria-labelledby="sources-title">
+    <h2 class="c6758cd" id="sources-title">Sources</h2>
+    <ul class="ce1eb65"><li><a class="caccc5e" href="https://www.getmonero.org/" rel="nofollow noopener" target="_blank">Monero project site</a></li>
+<li><a class="caccc5e" href="https://www.getmonero.org/resources/user-guides/" rel="nofollow noopener" target="_blank">Monero user guides</a></li>
+<li><a class="caccc5e" href="https://www.getmonero.org/resources/moneropedia/address.html" rel="nofollow noopener" target="_blank">Moneropedia — Address</a></li>
+<li><a class="caccc5e" href="https://www.getmonero.org/resources/moneropedia/subaddress.html" rel="nofollow noopener" target="_blank">Moneropedia — Subaddress</a></li>
+<li><a class="caccc5e" href="https://blockchair.com/monero" rel="nofollow noopener" target="_blank">Blockchair — Monero explorer</a></li>
+<li><a class="caccc5e" href="https://www.coingecko.com/" rel="nofollow noopener" target="_blank">CoinGecko</a></li></ul>
+  </section>
+  <footer class="c8c8866">
+    <div class="cf80dd1 c191d23">
+      <p>Updated Oct 12, 2026</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const TOKENS = [
+        { s: 'ETH', f: 'eth', p: 2550 }, { s: 'BTC', f: 'btc', p: 62000 },
+        { s: 'USDT', f: 'usdt', p: 1 }, { s: 'USDC', f: 'usdc', p: 1 },
+        { s: 'BNB', f: 'bnb', p: 585 }, { s: 'SOL', f: 'sol', p: 145 },
+        { s: 'ARB', f: 'arb', p: 0.62 }, { s: 'OP', f: 'optimism', p: 1.65 },
+        { s: 'MATIC', f: 'polygon', p: 0.42 }, { s: 'AVAX', f: 'avalanche', p: 27 },
+        { s: 'SUI', f: 'sui', p: 1.35 }, { s: 'LTC', f: 'ltc', p: 72 },
+        { s: 'TRX', f: 'trx', p: 0.16 }, { s: 'XMR', f: 'xmr', p: 155 },
+        { s: 'XRP', f: 'xrp', p: 0.52 }, { s: 'ZEC', f: 'zec', p: 32 }
+      ];
+      const FEE = 0.003;
+      const $ = (id) => document.getElementById(id);
+      const payAmt = $('pay-amount'), payTok = $('pay-token'), payUsd = $('pay-usd'), payIco = $('pay-ico');
+      const getAmt = $('get-amount'), getTok = $('get-token'), getUsd = $('get-usd'), getIco = $('get-ico');
+      const rateEl = $('swap-rate');
+      const tok = (s) => TOKENS.find((t) => t.s === s);
+      const num = (n) => new Intl.NumberFormat('en', { maximumFractionDigits: n >= 1 ? 4 : 6 }).format(n);
+      const usd = (v) => '~$' + new Intl.NumberFormat('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+      TOKENS.forEach((t) => {
+        [payTok, getTok].forEach((sel) => { const o = document.createElement('option'); o.value = t.s; o.textContent = t.s; sel.appendChild(o); });
+      });
+      const widget = document.querySelector('.cd0ca14');
+      const defFrom = (widget && widget.dataset.from) || 'ETH';
+      const fromOk = TOKENS.some((t) => t.s === defFrom) ? defFrom : 'ETH';
+      payTok.value = fromOk;
+      getTok.value = (fromOk === 'USDT') ? 'ETH' : 'USDT';
+      const calc = () => {
+        const pf = tok(payTok.value), gt = tok(getTok.value);
+        payIco.src = 'assets/tokens/' + pf.f + '.svg'; payIco.alt = pf.s;
+        getIco.src = 'assets/tokens/' + gt.f + '.svg'; getIco.alt = gt.s;
+        rateEl.textContent = '1 ' + pf.s + ' ≈ ' + num(pf.p / gt.p) + ' ' + gt.s;
+        const a = parseFloat(payAmt.value);
+        if (!Number.isFinite(a) || a <= 0) { getAmt.textContent = '—'; payUsd.textContent = '—'; getUsd.textContent = '—'; return; }
+        const out = a * (pf.p / gt.p) * (1 - FEE);
+        getAmt.textContent = num(out) + ' ' + gt.s;
+        payUsd.textContent = usd(a * pf.p);
+        getUsd.textContent = usd(out * gt.p);
+      };
+      const distinct = (changed, other) => { if (changed.value === other.value) { other.value = (TOKENS.find((t) => t.s !== changed.value) || TOKENS[0]).s; } };
+      payAmt.addEventListener('input', calc);
+      payTok.addEventListener('change', () => { distinct(payTok, getTok); calc(); });
+      getTok.addEventListener('change', () => { distinct(getTok, payTok); calc(); });
+      $('swap-switch').addEventListener('click', () => { const t = payTok.value; payTok.value = getTok.value; getTok.value = t; calc(); });
+      calc();
+    })();
+  </script>
+</body>
+</html>
