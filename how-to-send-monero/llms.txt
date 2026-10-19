@@ -1,3 +1,0 @@
-# How to Send Monero
-
-How to Send Monero from your own wallet: pick the right address type, set a fee priority, broadcast the transfer, and learn how many confirmations XMR needs.

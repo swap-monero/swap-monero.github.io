@@ -1,3 +1,0 @@
-# How Long Does Monero Take to Transfer
-
-How long does Monero take to transfer? About 20 minutes — funds land in ~2 minutes but need 10 confirmations before they are spendable. Full timing breakdown.
