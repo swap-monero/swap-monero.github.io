@@ -1,0 +1,1 @@
+{"name":"Monero Swap","short_name":"Monero Swap","description":"Monero Swap: exchange XMR to and from BTC, ETH or USDT through an instant-exchange route or BTC–XMR atomic swaps, with funds sent to your own wallet address.","start_url":"/","display":"standalone","background_color":"#f6f5f4","theme_color":"#f6f5f4","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}

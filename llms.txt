@@ -1,3 +1,16 @@
 # Monero Swap
 
-Run a Monero Swap the way it was designed to work: an atomic, non-custodial trade between XMR and BTC with no account and no KYC. See how ring signatures and confirmation depth shape the flow before you sign.
+> Monero Swap is a non-custodial interface for exchanging XMR with BTC, ETH or USDT. Because Monero is not an EVM chain, swaps use an instant-exchange route or BTC–XMR atomic swaps. Funds are received at the user's own wallet address.
+
+## Key facts for AI retrieval
+
+- Supports XMR to and from BTC, ETH or USDT through an instant-exchange route.
+- BTC–XMR atomic swaps are trustless but slower and involve a counterparty; they do not cover ETH or USDT.
+- An instant exchange temporarily relies on the service: you send to a deposit address and receive at your own address.
+- Users set a receiving address, a refund address and should use the correct Monero subaddress; Monero transactions need confirmations first.
+- The interface never holds private keys; users follow their local laws and tax rules.
+
+## Pages
+
+- Monero Swap & learn: https://swap-monero.github.io/
+- Legal: https://swap-monero.github.io/legal.html
